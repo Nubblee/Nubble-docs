@@ -79,7 +79,59 @@ root/
 
 ## 다이어그램 작성
 
-- Mermaid 사용
-- 역할-상황별로 적절한 다이어그램 스타일 적용
-  - 행위 흐름: 플로우차트
-  - 상호작용: 시퀀스 다이어그램
+### 기본 원칙
+- Mermaid를 사용하여 다이어그램 작성
+- 각 문서의 특성에 맞는 다이어그램 표현
+
+### 역할 문서의 다이어그램
+- 행위 중심의 flowchart
+- 해당 역할의 행위를 통한 도메인 도출
+- 행위 수행 시 필요한 도메인들의 흐름 표현
+
+예시: 스터디장의 행위와 도메인
+```mermaid
+flowchart LR
+    subgraph 스터디장 행위
+        L[문제 관리] -->|등록/수정/삭제| P[Problem]
+        L -->|연결| S[Study]
+        L -->|알림| N[Notice]
+    end
+```
+
+### 도메인 문서의 다이어그램
+1. 상태 다이어그램 (stateDiagram)
+   - 도메인의 상태 변화 표현
+   - 각 상태에서 가능한 행위 표현
+   - 예시: 문제의 상태 변화
+    ```mermaid
+    stateDiagram-v2
+    direction LR
+    [*] --> 등록됨: 문제 등록
+    등록됨 --> 공개됨: 공개 설정
+    공개됨 --> 마감됨: 제출 마감
+    ```
+
+2. 시퀀스 다이어그램 (sequenceDiagram)
+   - 도메인 간의 상호작용 순서 표현
+   - 이벤트와 데이터 흐름 표현
+   - 예시: 문제 등록 프로세스
+    ```mermaid
+    sequenceDiagram
+    actor Leader as 스터디장
+    participant Problem as 문제
+    participant Study as 스터디
+    participant Notice as 알림
+    participant Member as 스터디원
+    
+    Leader->>+Problem: 문제 등록 요청
+    Problem-->>-Leader: 등록 완료
+    
+    Problem->>+Study: 스터디에 문제 연결
+    Study-->>-Problem: 연결 완료
+    
+    Study->>+Notice: 새 문제 알림 생성
+    Notice-->>-Study: 알림 생성 완료
+    
+    Notice->>+Member: 스터디원들에게 알림 전송
+    Member-->>-Notice: 알림 수신 확인
+    ```
