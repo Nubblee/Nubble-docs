@@ -18,7 +18,7 @@ flowchart LR
 
     %% 참여 흐름
     JoinStudy -->|스터디 개설| Study2[스터디]
-    Study2[스터디] -->|유저에게 스터디장 권한 부여| StudyRole[스터디 역할]
+    Study2[스터디] -->|유저에게 스터디장 권한 부여| StudyMembership[스터디 역할]
 
     JoinStudy -->|스터디 신청서 작성| StudyApplication1[스터디 신청서]
     StudyApplication1[스터디 신청서] -->|신청서 추가| StudyAnnouncement2[스터디 공고]
@@ -37,7 +37,7 @@ flowchart LR
     - 작성
     - 제출
 
-- StudyRole (스터디 역할)
+- StudyMembership (스터디 역할)
     - 역할 부여
 
 ## 역할 상태
