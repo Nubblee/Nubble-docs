@@ -51,14 +51,14 @@ root/
 ├── README.md                # 도메인 설계 가이드 (현재 문서)
 ├── core.md                 # 핵심 기능 정의
 ├── domain/
-│   ├── roles/              # 역할 정의 및 행위
-│   │   ├── README.md       # 역할 설계 개요
-│   │   ├── user.md         # 기본 유저 역할 정의/행위
-│   │   ├── leader.md       # 스터디장 역할 정의/행위
-│   │   └── member.md       # 스터디원 역할 정의/행위
-│   │
-│   └── functional/         # 기능별 행위
-│       ├── README.md       # 기능 설계 개요
+│   ├── README.md       # 도메인 설계 개요
+│   └── ...             # 도메인별 속성/관계/비즈니스 규칙/책임 등
+│
+├── roles/              # 역할 정의 및 행위
+│   ├── README.md       # 역할 설계 개요
+│   ├── user.md         # 기본 유저 역할 정의/행위
+│   ├── leader.md       # 스터디장 역할 정의/행위
+│   └── member.md       # 스터디원 역할 정의/행위
 │
 └── api/
     └── README.md          # API 문서 개요
