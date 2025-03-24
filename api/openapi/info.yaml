@@ -1,0 +1,181 @@
+title: 코딩테스트 스터디 API
+description: |
+  코딩테스트 스터디 서비스의 API 문서입니다.
+  
+  ## 개요
+  
+  이 API는 코딩테스트 스터디 생성, 관리, 참여 및 문제 풀이 등의 기능을 제공합니다.
+  주요 기능으로는 스터디 개설, 스터디원 모집, 코딩테스트 문제 등록, 템플릿 기반 문제 풀이 작성 등이 있습니다.
+  
+  ## 주요 도메인
+               
+  - 유저(User): 서비스 사용자
+  - 스터디(Study): 코딩테스트 스터디 그룹
+  - 스터디 멤버십(StudyMembership): 사용자의 스터디 참여 정보
+  - 스터디 공고(StudyAnnouncement): 스터디 모집 정보
+  - 문제(Problem): 코딩테스트 문제
+  - 풀이(Solution): 문제 풀이
+  - 템플릿(Template): 풀이 템플릿
+
+  ## 요청 형식
+
+  - **Content-Type**: 모든 API 요청 시 `Content-Type: application/vnd.api+json` 헤더를 사용해야 합니다.
+  - **Accept**: 모든 API 요청 시 `Accept: application/vnd.api+json` 헤더를 사용해야 합니다.
+  
+  - **리소스 생성 (POST)**: 
+    ```json
+    {
+      "data": {
+        "type": "리소스타입",
+        "attributes": {
+          "속성1": "값1",
+          "속성2": "값2"
+        },
+        "relationships": {
+          "관계1": {
+            "data": { "type": "관계리소스타입", "id": "관계리소스ID" }
+          }
+        }
+      }
+    }
+    ```
+  
+  - **리소스 수정 (PATCH)**:
+    ```json
+    {
+      "data": {
+        "type": "리소스타입",
+        "id": "리소스ID",
+        "attributes": {
+          "속성1": "변경값1"
+        }
+      }
+    }
+    ```
+  
+  - **관계 관리**:
+    ```json
+    {
+      "data": {
+        "type": "관계리소스타입",
+        "id": "관계리소스ID"
+      }
+    }
+    ```
+  
+  - **필터링, 정렬, 페이지네이션**:
+    - `filter[필드명]=값`: 필드 기반 필터링
+    - `sort=필드명,-필드명2`: 정렬 (- 접두사는 내림차순)
+    - `page[number]=1&page[size]=10`: 페이지네이션
+    - `include=관계1,관계2`: 관련 리소스 포함
+    - `fields[리소스타입]=필드1,필드2`: 특정 필드만 요청
+
+  ## 응답 형식
+
+  - **정상 응답**: JSON:API 표준(`application/vnd.api+json`) 형식 사용
+  
+    단일 리소스 응답:
+    ```json
+    {
+      "data": {
+        "type": "리소스타입",
+        "id": "리소스ID",
+        "attributes": {
+          "속성1": "값1",
+          "속성2": "값2"
+        },
+        "relationships": {
+          "관계1": {
+            "data": { "type": "관계리소스타입", "id": "관계리소스ID" },
+            "links": {
+              "self": "/api/v1/리소스타입/리소스ID/relationships/관계1",
+              "related": "/api/v1/리소스타입/리소스ID/관계1"
+            }
+          }
+        },
+        "links": {
+          "self": "/api/v1/리소스타입/리소스ID"
+        }
+      },
+      "included": [
+        {
+          "type": "관계리소스타입",
+          "id": "관계리소스ID",
+          "attributes": {
+            "속성1": "값1"
+          }
+        }
+      ],
+      "meta": {
+        "추가정보": "값"
+      }
+    }
+    ```
+  
+    컬렉션 응답:
+    ```json
+    {
+      "data": [
+        {
+          "type": "리소스타입",
+          "id": "리소스ID1",
+          "attributes": { ... }
+        },
+        {
+          "type": "리소스타입",
+          "id": "리소스ID2",
+          "attributes": { ... }
+        }
+      ],
+      "links": {
+        "self": "/api/v1/리소스타입",
+        "first": "/api/v1/리소스타입?page[number]=1&page[size]=10",
+        "prev": null,
+        "next": "/api/v1/리소스타입?page[number]=2&page[size]=10",
+        "last": "/api/v1/리소스타입?page[number]=5&page[size]=10"
+      },
+      "meta": {
+        "totalItems": 42,
+        "totalPages": 5
+      }
+    }
+    ```
+
+  - **오류 응답**: RFC 9457 기반의 문제 상세(Problem Details) 형식 사용
+    - Content-Type: `application/problem+json`
+  
+    기본 오류 응답:
+    ```json
+    {
+      "type": "https://api.codingtest-study.com/problems/not-found",
+      "title": "요청한 리소스를 찾을 수 없습니다",
+      "status": 404,
+      "detail": "요청한 ID의 스터디를 찾을 수 없습니다",
+      "instance": "/api/v1/studies/잘못된ID"
+    }
+    ```
+  
+    유효성 검사 오류:
+    ```json
+    {
+      "type": "https://api.codingtest-study.com/problems/validation",
+      "title": "유효성 검사 실패",
+      "status": 400,
+      "detail": "요청 데이터에 유효성 검사 오류가 있습니다",
+      "instance": "/api/v1/users/register",
+      "errors": {
+        "email": {
+          "message": "잘못된 이메일 형식",
+          "code": "pattern",
+          "suggestion": "@ 및 도메인 이름을 포함하십시오"
+        },
+        "password": {
+          "message": "비밀번호가 너무 짧습니다",
+          "code": "minLength",
+          "suggestion": "최소 8자 이상으로 설정하세요"
+        }
+      }
+    }
+    ```
+
+version: 1.0.0
