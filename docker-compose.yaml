@@ -2,13 +2,17 @@ services:
   # OpenAPI 파일 번들링 서비스
   # 여러 파일로 나뉜 OpenAPI 스펙을 하나의 파일로 통합
   openapi-bundler:
-    image: node:18-alpine
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM node:18-alpine
+        RUN npm install -g @apidevtools/swagger-cli
+        WORKDIR /app
     volumes:
       - ./api/openapi:/app/openapi
     working_dir: /app
     command: >
-      sh -c "npm install -g @apidevtools/swagger-cli &&
-             swagger-cli bundle ./openapi/openapi.yaml -o ./openapi/bundled-openapi.yaml &&
+      sh -c "swagger-cli bundle ./openapi/openapi.yaml -o ./openapi/bundled-openapi.yaml &&
              echo 'OpenAPI 번들링 완료'"
 
   # Swagger UI 서비스
