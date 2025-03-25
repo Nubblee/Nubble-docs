@@ -1,0 +1,4 @@
+type: apiKey
+in: header
+name: Auth-Session-Id
+description: 로그인 시 발급된 인증 세션 ID

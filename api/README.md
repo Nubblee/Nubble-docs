@@ -16,11 +16,11 @@ openapi/
 │   │   ├── api.yaml            # 스터디 API 경로
 │   │   └── schemas.yaml        # 스터디 관련 스키마
 │   └── ... (다른 리소스들)
-└── common/                     # 공통 컴포넌트
-    ├── parameters.yaml         # 공통 파라미터
-    ├── responses.yaml          # 공통 응답 패턴
-    ├── schemas.yaml            # 공통 스키마
-    └── security.yaml           # 보안 정의
+└── security/                 # 보안 관련 정의
+│   └── session-auth.yaml     # 세션 기반 인증 정의
+└── errors/                   # 오류 관련 정의
+    ├── schemas.yaml          # 오류 스키마 (Error, ValidationError 등)
+    └── responses.yaml        # 공통 오류 응답
 ```
 
 1. **메인 문서**: `openapi.yaml`은 모든 API를 조합하는 진입점입니다. 서버 정보, 태그, 경로 참조를 포함합니다.
