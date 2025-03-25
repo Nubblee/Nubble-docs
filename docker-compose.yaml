@@ -1,0 +1,26 @@
+services:
+  # OpenAPI 파일 번들링 서비스
+  # 여러 파일로 나뉜 OpenAPI 스펙을 하나의 파일로 통합
+  openapi-bundler:
+    image: node:18-alpine
+    volumes:
+      - ./api/openapi:/app/openapi
+    working_dir: /app
+    command: >
+      sh -c "npm install -g @apidevtools/swagger-cli &&
+             swagger-cli bundle ./openapi/openapi.yaml -o ./openapi/bundled-openapi.yaml &&
+             echo 'OpenAPI 번들링 완료'"
+
+  # Swagger UI 서비스
+  # API 문서를 시각적 인터페이스로 표시
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api/openapi:/usr/share/nginx/html/openapi
+    environment:
+      - SWAGGER_JSON=/usr/share/nginx/html/openapi/bundled-openapi.yaml # 번들링된 파일 지정
+    depends_on:
+      openapi-bundler:  # 번들링 서비스가 완료된 후 실행
+        condition: service_completed_successfully
