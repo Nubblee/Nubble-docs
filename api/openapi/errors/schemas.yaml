@@ -1,0 +1,95 @@
+# Error 스키마
+# RFC 9457 "Problem Details for HTTP APIs" 표준을 준수하는 기본 오류 응답 형식
+# 모든 API 오류 응답의 기본 구조를 정의합니다
+Error:
+  type: object
+  properties:
+    type:
+      type: string
+      format: uri
+      description: |
+        문제 유형을 식별하는 URI 참조입니다.
+        일반적으로 오류 유형에 대한 문서 페이지를 가리키거나,
+        오류 유형의 고유 식별자 역할을 합니다.
+        지정하지 않으면 기본값은 'about:blank'입니다.
+      default: "about:blank"
+      example: "about:blank"
+    title:
+      type: string
+      description: |
+        오류에 대한 간략한 사람이 읽을 수 있는 요약입니다.
+        UI에 표시되거나 로그에 기록될 수 있는 간결한 메시지입니다.
+      example: "잘못된 요청"
+    status:
+      type: integer
+      description: |
+        HTTP 상태 코드입니다.
+        응답 헤더의 상태 코드와 일치해야 합니다.
+      example: 400
+    detail:
+      type: string
+      description: |
+        오류에 대한 상세 설명입니다.
+        title보다 더 구체적인 정보를 제공하며,
+        현재 특정 오류 발생에 대한 자세한 설명을 포함합니다.
+      example: "요청 본문의 JSON 형식이 올바르지 않습니다"
+    instance:
+      type: string
+      format: uri
+      description: 이 특정 오류 인스턴스를 식별하는 URI 참조
+  required:
+    - type
+    - title
+    - status
+
+# 유효성 검사 실패 시 발생하는 400 Bad Request 응답을 위한 오류 스키마
+ValidationError:
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      properties:
+        errors:
+          type: array
+          description: 유효성 검사에 실패한 각 필드에 대한 상세 정보 배열
+          items:
+            type: object
+            description: 단일 필드의 유효성 검사 오류 정보
+            properties:
+              field:
+                type: string
+                description: 유효성 검사에 실패한 필드
+              message:
+                type: string
+                description: 해당 필드에 대한 오류 메시지
+              code:
+                type: string
+                description: 오류 코드
+            required:
+              - field
+              - message
+
+# 리소스 중복/충돌로 인한 409 Conflict 응답을 위한 오류 스키마
+ConflictError:
+  allOf:
+    - $ref: '#/Error'
+    - type: object
+      description: |
+        리소스 충돌 오류를 표현하기 위한 확장 스키마입니다.
+        주로 고유성이 보장되어야 하는 필드(사용자명, 이메일, 스터디명 등)가 
+        이미 사용 중일 때 발생합니다.
+      properties:
+        conflictField:
+          type: string
+          description: |
+            충돌이 발생한 필드명을 나타냅니다.
+            예: 'username', 'email', 'name' 등
+            클라이언트는 이 값을 기준으로 사용자에게 적절한 오류 메시지를 표시할 수 있습니다.
+        conflictValue:
+          type: string
+          description: 충돌을 일으킨 값
+        resourceType:
+          type: string
+          description: |
+            충돌이 발생한 리소스 유형을 나타냅니다.
+            예: 'user', 'study', 'solution' 등
+            다양한 리소스에서 동일한 필드명이 사용될 경우 충돌을 정확히 식별하는 데 도움이 됩니다.
