@@ -1,0 +1,62 @@
+# 단일 리소스 응답, 존재하지 않는 경우 404(Not Found)
+SingleResourceResponse:
+  type: object
+  description: 단일 리소스 응답
+  properties:
+    data:
+      $ref: './schemas.yaml#/Resource'
+    included:
+      type: array
+      description: 관계된 리소스 정보
+      items:
+        $ref: './schemas.yaml#/Resource'
+    meta:
+      $ref: './schemas.yaml#/Meta'
+    links:
+      $ref: './schemas.yaml#/Links'
+  oneOf:
+    - required: [ 'data' ]
+    - required: [ 'meta' ]
+
+# 컬렉션 응답
+CollectionResponse:
+  type: object
+  description: 리소스 컬렉션 응답
+  properties:
+    data:
+      type: array
+      description: 리소스 배열
+      items:
+        $ref: '#/Resource'
+    included:
+      type: array
+      description: 관계된 리소스 정보
+      items:
+        $ref: './schemas.yaml#/Resource'
+    meta:
+      $ref: './schemas.yaml#/Meta'
+    links:
+      $ref: './schemas.yaml#/Links'
+  oneOf:
+    - required: [ 'data' ]
+    - required: [ 'meta' ]
+
+# 관계 응답 /resource/relationships/included
+RelationshipResponse:
+  type: object
+  description: 리소스 관계 응답
+  properties:
+    data:
+      oneOf:
+        - $ref: '#/ResourceIdentifier'
+        - type: array
+          items:
+            $ref: '#/ResourceIdentifier'
+        - type: 'null'
+    meta:
+      $ref: '#/Meta'
+    links:
+      $ref: '#/Links'
+  oneOf:
+    - required: [ 'data' ]
+    - required: [ 'meta' ]

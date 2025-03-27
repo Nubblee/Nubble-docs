@@ -1,0 +1,117 @@
+Meta:
+  type: object
+  description: 메타데이터 정보
+  example:
+    totalPages: 3
+    totalItems: 27
+
+Link:
+  type: object
+  description: 단일 링크 정보
+  properties:
+    href:
+      type: string
+      format: uri
+      description: 링크 URI
+    meta:
+      $ref: '#/Meta'  # 링크에 대한 추가 메타데이터
+  required:
+    - href
+
+# 링크 모음 - 페이지네이션 및 관련 리소스 링크
+Links:
+  type: object
+  description: 링크 정보 집합
+  properties:
+    self:
+      oneOf:
+        - type: string  # 단순 URI 문자열
+          format: uri
+        - $ref: '#/Link'  # 또는 메타데이터가 있는 링크 객체
+    related:
+      oneOf:
+        - type: string
+          format: uri
+        - $ref: '#/Link'
+    first:
+      oneOf:
+        - type: string
+          format: uri
+        - $ref: '#/Link'
+    prev:
+      oneOf:
+        - type: string
+          format: uri
+        - $ref: '#/Link'
+    next:
+      oneOf:
+        - type: string
+          format: uri
+        - $ref: '#/Link'
+    last:
+      oneOf:
+        - type: string
+          format: uri
+        - $ref: '#/Link'
+  additionalProperties: # 위에 정의되지 않은 추가 링크 관계도 허용
+    oneOf:
+      - type: string
+        format: uri
+      - $ref: '#/Link'
+
+
+# 리소스 식별자
+ResourceIdentifier:
+  type: object
+  description: 리소스 식별 정보
+  properties:
+    type:
+      type: string
+      description: "리소스 유형 (예: 'articles', 'users')" # 리소스 유형 복수 표시
+    id:
+      type: string
+      description: 리소스 고유 식별자
+    meta:
+      $ref: '#/Meta'
+  required:
+    - type # type만 필수로 설정 (id는 필수가 아닐 수도 있음, 새로 생성 중인 리소스)
+
+# 관계 정보
+Relationship:
+  type: object
+  description: 리소스 간의 관계 정보
+  properties:
+    links:
+      $ref: '#/Links'
+    data:
+      oneOf:
+        - $ref: '#/ResourceIdentifier' # 단일 리소스
+        - type: array # 다중 리소스
+          items:
+            $ref: '#/ResourceIdentifier'
+        - type: 'null' # 관계된 리소스가 존재하지 않음
+    meta:
+      $ref: '#/Meta'
+
+# 관계 집합
+Relationships:
+  type: object
+  description: 리소스의 모든 관계 정보
+  additionalProperties:
+    $ref: '#/Relationship'
+
+
+# 기본 리소스 구조
+Resource:
+  type: object
+  description: JSON:API 리소스 객체
+  allOf:
+    - $ref: '#/ResourceIdentifier'
+  properties:
+    attributes:
+      type: object
+      description: 리소스 속성
+    relationships:
+      $ref: '#/Relationships'
+    links:
+      $ref: '#/Links'
