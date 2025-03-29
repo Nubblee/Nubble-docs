@@ -85,13 +85,15 @@ Relationship:
       $ref: '#/Links'
     data:
       oneOf:
-        - $ref: '#/ResourceIdentifier' # 단일 리소스
-        - type: array # 다중 리소스
+        - $ref: './schemas.yaml#/ResourceIdentifier'  # to-one 관계
+        - type: array                                 # to-many 관계
           items:
-            $ref: '#/ResourceIdentifier'
-        - type: 'null' # 관계된 리소스가 존재하지 않음
+            $ref: './schemas.yaml#/ResourceIdentifier'
+        - type: null                                  # 빈 to-one 관계
     meta:
       $ref: '#/Meta'
+  required:
+    - data
 
 # 관계 집합
 Relationships:

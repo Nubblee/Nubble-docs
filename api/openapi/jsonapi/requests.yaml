@@ -1,0 +1,56 @@
+# 리소스 생성 요청
+CreateResourceRequest:
+  type: object
+  description: 리소스 생성 요청
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 리소스 유형
+        attributes:
+          type: object
+          description: 리소스 속성
+        relationships:
+          $ref: './schemas.yaml#/Relationships'
+      required:
+        - type
+    meta:
+      $ref: './schemas.yaml#/Meta'
+  required:
+    - data
+
+# 리소스 업데이트 요청
+UpdateResourceRequest:
+  type: object
+  description: 리소스 업데이트 요청
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 리소스 유형
+        id:
+          type: string
+          description: 리소스 고유 식별자
+        attributes:
+          type: object
+          description: 업데이트할 리소스 속성
+        relationships:
+          $ref: './schemas.yaml#/Relationships'
+      required:
+        - type
+        - id
+    meta:
+      $ref: './schemas.yaml#/Meta'
+  required:
+    - data
+
+# 단일 종류의 관계 업데이트 요청
+UpdateRelationshipRequest:
+  allOf:
+    - $ref: './schemas.yaml#/Relationship'
+    - type: object
+      description: 단일 종류의 관계 업데이트 요청
