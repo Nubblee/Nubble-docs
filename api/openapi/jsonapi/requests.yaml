@@ -12,14 +12,6 @@ CreateResourceRequest:
         attributes:
           type: object
           description: 리소스 속성
-        relationships:
-          $ref: './schemas.yaml#/Relationships'
-      required:
-        - type
-    meta:
-      $ref: './schemas.yaml#/Meta'
-  required:
-    - data
 
 # 리소스 업데이트 요청
 UpdateResourceRequest:
