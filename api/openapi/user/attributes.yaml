@@ -1,0 +1,48 @@
+# 사용자 속성 필드
+Id:
+  type: string
+  description: 사용자 고유 식별자
+  example: "123"
+
+LoginId:
+  type: string
+  description: 사용자 로그인 ID (고유값)
+  example: "hongkildong"
+  minLength: 4
+  maxLength: 20
+  pattern: "^[a-zA-Z0-9]+$"
+
+Email:
+  type: string
+  format: email
+  description: 사용자 이메일 주소 (고유값)
+  example: "hongkildong@example.com"
+  maxLength: 254
+  nullable: true
+
+Password:
+  type: string
+  format: password
+  description: 사용자 비밀번호
+  example: "asdasd123!"
+  minLength: 8
+  maxLength: 20
+
+Nickname:
+  type: string
+  description: 사용자 닉네임 또는 활동명
+  example: "홍길동"
+  maxLength: 20
+
+ProfileImage:
+  type: string
+  nullable: true
+  description: 프로필 이미지 URL
+  example: "https://example.com/profiles/default.png"
+
+PreferredRegion:
+  type: string
+  description: 사용자 선호 지역 정보 (시/도, 시/군/구), '/'로 구분
+  example: "서울시/강남구"
+  maxLength: 30
+  nullable: true

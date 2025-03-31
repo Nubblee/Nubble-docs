@@ -1,0 +1,16 @@
+# 사용자 메타 정보
+EmailVerified:
+  type: boolean
+  description: 이메일 인증 완료 여부
+  example: false
+
+AccountStatus:
+  type: string
+  enum:
+    - ACTIVE
+    - INACTIVE
+    - SUSPENDED
+    - DORMANT
+    - WITHDRAWN
+  description: 계정 상태
+  example: "ACTIVE"

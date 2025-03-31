@@ -1,0 +1,5 @@
+# JSON:API 사용자 타입
+Type:
+  type: string
+  enum: [users]
+  default: users

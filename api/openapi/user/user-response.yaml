@@ -1,0 +1,40 @@
+Response:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        id:
+          $ref: './attributes.yaml#/Id'
+        type:
+          $ref: './type.yaml#/Type'
+        attributes:
+          type: object
+          properties:
+            loginId:
+              $ref: './attributes.yaml#/LoginId'
+            email:
+              $ref: './attributes.yaml#/Email'
+            nickname:
+              $ref: './attributes.yaml#/Nickname'
+            profileImage:
+              $ref: './attributes.yaml#/ProfileImage'
+            preferredRegion:
+              $ref: './attributes.yaml#/PreferredRegion'
+        meta:
+          type: object
+          properties:
+            emailVerified:
+              $ref: './metas.yaml#/EmailVerified'
+            accountStatus:
+              $ref: './metas.yaml#/AccountStatus'
+        links:
+          type: object
+          properties:
+            self:
+              $ref: './links.yaml#/Self'
+      required:
+        - id
+        - type
+  required:
+    - data
