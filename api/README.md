@@ -17,7 +17,7 @@ openapi/
 │   │   └── schemas.yaml        # 스터디 관련 스키마
 │   └── ... (다른 리소스들)
 └── security/                 # 보안 관련 정의
-│   └── session-auth.yaml     # 세션 기반 인증 정의
+│   └── auth-session.yaml     # 세션 기반 인증 정의
 └── errors/                   # 오류 관련 정의
     ├── schemas.yaml          # 오류 스키마 (Error, ValidationError 등)
     └── responses.yaml        # 공통 오류 응답
@@ -68,6 +68,11 @@ Spring Boot 3에서 구현합니다.(구현 상세: [ProblemJSON-Springboot3/REA
         - RFC 3986 표준 준수: URI 경로 세그먼트는 대소문자를 구분하지만 실제 구현에서는 혼란 방지를 위해 소문자 통일이 권장됨
         - 가독성: 카멜케이스는 URL에서 가독성이 떨어지고, 스네이크케이스는 밑줄과 함께 있을 때 구별하기 어려움
         - 웹 브라우저 사용성: 많은 브라우저에서 단어를 옆으로 이동할 때 하이픈('-')을 띄어쓰기처럼 인식하여 단어 단위 탐색이 용이함
+   - 필드 변수(속성): camelCase (e.g., `loginId`, `preferredRegion`, `lastLoginDate`)
+      - Spring Boot 일관성: Java 클래스 필드명과 동일한 규칙을 적용하여 백엔드 코드와의 변환 작업 최소화
+      - JSON 표준 관행: JavaScript와 JSON 생태계에서 camelCase가 사실상 표준
+      - JSON:API 호환성: JSON:API 스펙은 일반적으로 리소스 속성에 camelCase 사용
+      - 프론트엔드 통합 용이성: JavaScript 프론트엔드와 통합 시 필드명 변환 없이 바로 사용 가능
 
 3. **태그 사용**:
     - 모든 엔드포인트에 적절한 태그 지정
