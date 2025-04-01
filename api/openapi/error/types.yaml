@@ -1,0 +1,69 @@
+# 유효성 검사 실패 시 발생하는 400 Bad Request 응답을 위한 오류 스키마
+ValidationError:
+  type: object
+  properties:
+    type:
+      $ref: './schemas.yaml#/Type'
+    title:
+      $ref: './schemas.yaml#/Title'
+      example:
+    status:
+      $ref: './schemas.yaml#/Status'
+    errors:
+      type: array
+      description: 유효성 검사에 실패한 각 필드에 대한 상세 정보 배열
+      items:
+        type: object
+        description: 단일 필드의 유효성 검사 오류 정보
+        properties:
+          field:
+            type: string
+            description: 유효성 검사에 실패한 필드
+            example: 유효성 검사에 실패한 필드
+          message:
+            type: string
+            description: 해당 필드에 대한 오류 메시지
+            example: 해당 필드에 대한 오류 메시지
+  example:
+    title: 유효성 검사 실패
+    status: 400
+    errors:
+      - field: 유효성 검사에 실패한 필드
+        message: 해당 필드에 대한 오류 메시지
+
+# 리소스 중복/충돌로 인한 409 Conflict 응답을 위한 오류 스키마
+ConflictError:
+  type: object
+  description: |
+    리소스 충돌 오류를 표현하기 위한 확장 스키마입니다.
+    주로 고유성이 보장되어야 하는 필드(사용자명, 이메일, 스터디명 등)가 
+    이미 사용 중일 때 발생합니다.
+  properties:
+    type:
+      $ref: './schemas.yaml#/Type'
+    title:
+      $ref: './schemas.yaml#/Title'
+    status:
+      $ref: './schemas.yaml#/Status'
+    conflictField:
+      type: string
+      description: |
+        충돌이 발생한 필드명을 나타냅니다.
+        예: 'username', 'email', 'name' 등
+        클라이언트는 이 값을 기준으로 사용자에게 적절한 오류 메시지를 표시할 수 있습니다.
+      example: 충돌이 발생한 필드명
+    conflictValue:
+      type: string
+      description: 충돌을 일으킨 값
+    resourceType:
+      type: string
+      description: |
+        충돌이 발생한 리소스 유형을 나타냅니다.
+        예: 'user', 'study', 'solution' 등
+        다양한 리소스에서 동일한 필드명이 사용될 경우 충돌을 정확히 식별하는 데 도움이 됩니다.
+  example:
+    title: 리소스 충돌
+    status: 409
+    conflictField: 충돌이 발생한 필드명
+    conflictValue: 충돌을 일으킨 값
+    resourceType: 충돌이 발생한 리소스 유형

@@ -31,58 +31,13 @@ Path:
         content:
           application/problem+json:
             schema:
-              $ref: '../../error/responses.yaml#/ValidationError'
-            examples:
-              invalid-login-id:
-                summary: 유효하지 않은 사용자명
-                value:
-                  type: "https://example.com/problems/validation-error"
-                  title: "유효성 검사 오류"
-                  status: 400
-                  detail: "입력하신 값이 유효성 검사 규칙을 위반했습니다"
-                  errors:
-                    - field: "loginId"
-                      message: "사용자명은 영문자, 숫자만 포함할 수 있습니다"
-              invalid-password:
-                summary: 유효하지 않은 비밀번호
-                value:
-                  type: "https://example.com/problems/validation-error"
-                  title: "유효성 검사 오류"
-                  status: 400
-                  detail: "입력하신 비밀번호가 보안 요구사항을 충족하지 않습니다"
-                  errors:
-                    - field: "password"
-                      message: "비밀번호는 최소 8자 이상이어야 합니다."
+              $ref: '../../error/types.yaml#/ValidationError'
       '409':
         description: 이미 존재하는 사용자명 또는 이메일
         content:
           application/problem+json:
             schema:
-              $ref: '../../error/responses.yaml#/ConflictError'
-            examples:
-              login-id-conflict:
-                summary: 사용자명 중복
-                value:
-                  type: "https://example.com/problems/resource-conflict"
-                  title: "리소스 충돌"
-                  status: 409
-                  detail: "입력하신 사용자명(hongkildong)은 이미 사용 중입니다"
-                  instance: "/users"
-                  conflictField: "loginId"
-                  conflictValue: "hongkildong"
-                  resourceType: "user"
-              email-conflict:
-                summary: 이메일 중복
-                value:
-                  type: "https://example.com/problems/resource-conflict"
-                  title: "리소스 충돌"
-                  status: 409
-                  detail: "입력하신 이메일(hongkildong@example.com)은 이미 등록되어 있습니다"
-                  instance: "/users"
-                  conflictField: "email"
-                  conflictValue: "hongkildong@example.com"
-                  resourceType: "user"
-
+              $ref: '../../error/types.yaml#/ConflictError'
 
 Request:
   allOf:

@@ -1,43 +1,37 @@
 # Error 스키마
 # RFC 9457 "Problem Details for HTTP APIs" 표준을 준수하는 기본 오류 응답 형식
 # 모든 API 오류 응답의 기본 구조를 정의합니다
-Error:
-  type: object
-  properties:
-    type:
-      type: string
-      format: uri
-      description: |
-        문제 유형을 식별하는 URI 참조입니다.
-        일반적으로 오류 유형에 대한 문서 페이지를 가리키거나,
-        오류 유형의 고유 식별자 역할을 합니다.
-        지정하지 않으면 기본값은 'about:blank'입니다.
-      default: "about:blank"
-      example: "about:blank"
-    title:
-      type: string
-      description: |
-        오류에 대한 간략한 사람이 읽을 수 있는 요약입니다.
-        UI에 표시되거나 로그에 기록될 수 있는 간결한 메시지입니다.
-      example: "잘못된 요청"
-    status:
-      type: integer
-      description: |
-        HTTP 상태 코드입니다.
-        응답 헤더의 상태 코드와 일치해야 합니다.
-      example: 400
-    detail:
-      type: string
-      description: |
-        오류에 대한 상세 설명입니다.
-        title보다 더 구체적인 정보를 제공하며,
-        현재 특정 오류 발생에 대한 자세한 설명을 포함합니다.
-      example: "요청 본문의 JSON 형식이 올바르지 않습니다"
-    instance:
-      type: string
-      format: uri
-      description: 이 특정 오류 인스턴스를 식별하는 URI 참조
-  required:
-    - type
-    - title
-    - status
+Type:
+  type: string
+  format: uri
+  description: |
+    문제 유형을 식별하는 URI 참조입니다.
+    일반적으로 오류 유형에 대한 문서 페이지를 가리키거나,
+    오류 유형의 고유 식별자 역할을 합니다.
+    지정하지 않으면 기본값은 'about:blank'입니다.
+  default: "about:blank"
+  example: "about:blank"
+
+Title:
+  type: string
+  description: |
+    오류에 대한 간략한 사람이 읽을 수 있는 요약입니다.
+    UI에 표시되거나 로그에 기록될 수 있는 간결한 메시지입니다.
+
+Status:
+  type: integer
+  description: |
+    HTTP 상태 코드입니다.
+    응답 헤더의 상태 코드와 일치해야 합니다.
+
+Detail:
+  type: string
+  description: |
+    오류에 대한 상세 설명입니다.
+    title보다 더 구체적인 정보를 제공하며,
+    현재 특정 오류 발생에 대한 자세한 설명을 포함합니다.
+
+instance:
+  type: string
+  format: uri
+  description: 이 특정 오류 인스턴스를 식별하는 URI 참조
