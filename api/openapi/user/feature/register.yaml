@@ -6,6 +6,7 @@ Path:
     summary: 회원가입
     description: 새로운 사용자 계정을 생성합니다
     operationId: registerUser
+    security: []
     requestBody:
       required: true
       content:
