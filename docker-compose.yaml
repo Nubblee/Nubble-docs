@@ -12,7 +12,7 @@ services:
       - ./api/openapi:/app/openapi
     working_dir: /app
     command: >
-      sh -c "redocly bundle ./openapi/openapi.yaml --output ./openapi/bundled-openapi.yaml --dereferenced &&
+      sh -c "redocly bundle ./openapi/openapi.yaml --output ./openapi/bundled-openapi.yaml &&
             echo 'Redocly 번들링 완료'"
 
   # ReDoc 서비스
