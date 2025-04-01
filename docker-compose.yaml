@@ -6,19 +6,19 @@ services:
       context: .
       dockerfile_inline: |
         FROM node:18-alpine
-        RUN npm install -g @apidevtools/swagger-cli
+        RUN npm install -g @redocly/cli
         WORKDIR /app
     volumes:
       - ./api/openapi:/app/openapi
     working_dir: /app
     command: >
-      sh -c "swagger-cli bundle ./openapi/openapi.yaml -o ./openapi/bundled-openapi.yaml &&
-             echo 'OpenAPI 번들링 완료'"
+      sh -c "redocly bundle ./openapi/openapi.yaml --output ./openapi/bundled-openapi.yaml --dereferenced &&
+            echo 'Redocly 번들링 완료'"
 
   # ReDoc 서비스
   # API 문서를 시각적 인터페이스로 표시
   redoc:
-    image: redocly/redoc
+    image: redocly/redoc:latest
     ports:
       - "8080:80"
     volumes:

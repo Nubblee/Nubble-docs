@@ -7,10 +7,18 @@ servers:
   - url: 'http://localhost:8080/api/v1'
     description: 'Local development server'
 
+security:
+  - NubbleAuth: []
+
+components:
+  securitySchemes:
+    NubbleAuth:
+      type: apiKey
+      in: header
+      name: Auth-Session-Id
+      description: 로그인 시 발급된 인증 세션 ID
+
 paths:
   # 사용자 API
   /users:
     $ref: './user/feature/register.yaml#/Path'
-
-security:
-  - authSession: []
