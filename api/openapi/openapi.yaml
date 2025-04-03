@@ -26,3 +26,5 @@ paths:
   # 인증 API
   /auth/login:
     $ref: './auth/feature/login.yaml#/Path'
+  /auth/logout:
+    $ref: './auth/feature/logout.yaml#/Path'
