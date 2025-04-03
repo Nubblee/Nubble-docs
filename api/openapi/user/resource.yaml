@@ -1,4 +1,4 @@
-Response:
+Resource:
   type: object
   properties:
     data:

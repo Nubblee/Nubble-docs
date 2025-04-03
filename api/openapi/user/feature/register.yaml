@@ -2,7 +2,7 @@
 Path:
   post:
     tags:
-      - 사용자 API
+      - 유저 API
     summary: 회원가입
     description: 새로운 사용자 계정을 생성합니다
     operationId: registerUser
@@ -26,7 +26,7 @@ Path:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '../response.yaml#/Response'
+              $ref: '../resource.yaml#/Resource'
       '400':
         description: 유효하지 않은 입력값
         content:
