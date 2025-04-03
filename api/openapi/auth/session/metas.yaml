@@ -1,0 +1,7 @@
+HeaderName:
+  type: string
+  description: |
+    세션 ID를 포함해야 하는 HTTP 헤더 이름 (키)
+    클라이언트는 이 헤더 이름으로 sessionId를 모든 인증된 요청에 포함해야 함
+  default: "Auth-Session-Id"
+  example: "Auth-Session-Id"

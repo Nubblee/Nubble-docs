@@ -9,8 +9,6 @@ Type:
     일반적으로 오류 유형에 대한 문서 페이지를 가리키거나,
     오류 유형의 고유 식별자 역할을 합니다.
     지정하지 않으면 기본값은 'about:blank'입니다.
-  default: "about:blank"
-  example: "about:blank"
 
 Title:
   type: string

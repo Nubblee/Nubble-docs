@@ -1,0 +1,22 @@
+Response:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: './type.yaml#/Type'
+        id:
+          $ref: './attributes.yaml#/SessionId'
+        attributes:
+          type: object
+          properties:
+            expiresAt:
+              $ref: './attributes.yaml#/ExpiresAt'
+        relationships:
+          $ref: '../../user/relationship.yaml#/User'
+    meta:
+      type: object
+      properties:
+        headerName:
+          $ref: './metas.yaml#/HeaderName'

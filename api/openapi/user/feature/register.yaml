@@ -26,7 +26,7 @@ Path:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '../user-response.yaml#/Response'
+              $ref: '../response.yaml#/Response'
       '400':
         description: 유효하지 않은 입력값
         content:

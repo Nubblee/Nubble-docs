@@ -5,7 +5,7 @@ Response:
       type: object
       properties:
         id:
-          $ref: './attributes.yaml#/Id'
+          $ref: './attributes.yaml#/UserId'
         type:
           $ref: './type.yaml#/Type'
         attributes:

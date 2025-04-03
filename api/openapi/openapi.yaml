@@ -22,3 +22,7 @@ paths:
   # 사용자 API
   /users:
     $ref: './user/feature/register.yaml#/Path'
+
+  # 인증 API
+  /auth/sessions:
+    $ref: './auth/session/feature/login.yaml#/Path'

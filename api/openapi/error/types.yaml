@@ -25,6 +25,7 @@ ValidationError:
             description: 해당 필드에 대한 오류 메시지
             example: 해당 필드에 대한 오류 메시지
   example:
+    type: about:blank
     title: 유효성 검사 실패
     status: 400
     errors:
@@ -62,8 +63,26 @@ ConflictError:
         예: 'user', 'study', 'solution' 등
         다양한 리소스에서 동일한 필드명이 사용될 경우 충돌을 정확히 식별하는 데 도움이 됩니다.
   example:
+    type: about:blank
     title: 리소스 충돌
     status: 409
     conflictField: 충돌이 발생한 필드명
     conflictValue: 충돌을 일으킨 값
     resourceType: 충돌이 발생한 리소스 유형
+
+InvalidCredentialsError:
+  type: object
+  description: |
+    로그인 시도 중 아이디 또는 비밀번호가 올바르지 않은 경우 발생하는 오류
+  properties:
+    type:
+      $ref: './schemas.yaml#/Type'
+    title:
+      $ref: './schemas.yaml#/Title'
+    status:
+      $ref: './schemas.yaml#/Status'
+  example:
+    type: about:blank
+    title: 인증 실패
+    status: 401
+    detail: "아이디 또는 비밀번호가 올바르지 않습니다"

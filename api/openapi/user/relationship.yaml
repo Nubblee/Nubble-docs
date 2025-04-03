@@ -1,0 +1,18 @@
+User:
+  type: object
+  properties:
+    user:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              $ref: './type.yaml#/Type'
+            id:
+              $ref: './attributes.yaml#/UserId'
+        links:
+          type: object
+          properties:
+            related:
+              $ref: './links.yaml#/Self'
