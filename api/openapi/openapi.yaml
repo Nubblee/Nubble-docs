@@ -24,5 +24,5 @@ paths:
     $ref: './user/feature/register.yaml#/Path'
 
   # 인증 API
-  /auth/sessions:
-    $ref: './auth/session/feature/login.yaml#/Path'
+  /auth/login:
+    $ref: './auth/feature/login.yaml#/Path'

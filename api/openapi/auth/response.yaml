@@ -7,14 +7,14 @@ Response:
         type:
           $ref: './type.yaml#/Type'
         id:
-          $ref: './attributes.yaml#/SessionId'
+          $ref: './session/attributes.yaml#/SessionId'
         attributes:
           type: object
           properties:
             expiresAt:
-              $ref: './attributes.yaml#/ExpiresAt'
+              $ref: './session/attributes.yaml#/ExpiresAt'
         relationships:
-          $ref: '../../user/relationship.yaml#/User'
+          $ref: '../user/relationship.yaml#/User'
     meta:
       type: object
       properties:

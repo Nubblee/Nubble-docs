@@ -21,7 +21,7 @@ Path:
             description: |
               인증 세션 ID (이후 모든 인증 요청에 포함되어야 함)
             schema:
-              $ref: '../attributes.yaml#/SessionId'
+              $ref: '../session/attributes.yaml#/SessionId'
         content:
           application/vnd.api+json:
             schema:
@@ -31,13 +31,13 @@ Path:
         content:
           application/problem+json:
             schema:
-              $ref: '../../../error/types.yaml#/ValidationError'
+              $ref: '../../error/types.yaml#/ValidationError'
       '401':
         description: 인증 실패
         content:
           application/problem+json:
             schema:
-              $ref: '../../../error/types.yaml#/InvalidCredentialsError'
+              $ref: '../../error/types.yaml#/InvalidCredentialsError'
 
 
 Request:
@@ -53,9 +53,9 @@ Request:
           description: 로그인에 필요한 속성
           properties:
             loginId:
-              $ref: '../../../user/attributes.yaml#/LoginId'
+              $ref: '../../user/attributes.yaml#/LoginId'
             password:
-              $ref: '../../../user/attributes.yaml#/Password'
+              $ref: '../../user/attributes.yaml#/Password'
           required: [ loginId, password ]
           additionalProperties: false
       required:
