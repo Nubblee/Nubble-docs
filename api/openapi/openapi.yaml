@@ -34,6 +34,10 @@ paths:
   /users/{userId}:
     patch:
       $ref: './user/feature/update.yaml#/Patch'
+  /users/me:
+    get:
+      $ref: './user/feature/get-current.yaml#/Get'
+
 
   # 인증 API
   /auth/login:

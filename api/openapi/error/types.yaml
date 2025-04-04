@@ -70,6 +70,7 @@ ConflictError:
     conflictValue: 충돌을 일으킨 값
     resourceType: 충돌이 발생한 리소스 유형
 
+# 로그인 시도 실패 시 발생하는 401 Unauthorized 응답을 위한 오류 스키마
 InvalidCredentialsError:
   type: object
   description: |
@@ -86,6 +87,29 @@ InvalidCredentialsError:
     title: 인증 실패
     status: 401
     detail: "아이디 또는 비밀번호가 올바르지 않습니다"
+
+# 인증되지 않은 요청에 대한 401 Unauthorized 응답을 위한 오류 스키마
+UnauthenticatedError:
+  type: object
+  description: |
+    인증이 필요한 리소스에 인증 없이 접근하려고 할 때 발생하는 오류입니다.
+    주로 인증 토큰/세션이 없거나, 만료되었거나, 유효하지 않은 경우 발생합니다.
+    이 오류는 사용자가 로그인하지 않았거나 세션이 만료된 상황을 나타냅니다.
+  properties:
+    type:
+      $ref: './schemas.yaml#/Type'
+    title:
+      $ref: './schemas.yaml#/Title'
+    status:
+      $ref: './schemas.yaml#/Status'
+    required:
+      - type
+      - title
+      - status
+    example:
+      type: "about:blank"
+      title: "인증 필요"
+      status: 401
 
 # 권한 부족으로 인한 403 Forbidden 응답을 위한 오류 스키마
 ForbiddenError:

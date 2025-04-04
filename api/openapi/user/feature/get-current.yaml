@@ -1,0 +1,25 @@
+# 사용자 프로필 조회
+Get:
+  tags:
+    - User API
+  summary: 로그인한 사용자 정보 조회
+  description: |
+    현재 로그인한 사용자의 상세 정보를 조회합니다.
+
+    - 인증된 세션이 필요합니다 (Auth-Session-Id 헤더 사용)
+    - 자신의 모든 개인 정보를 조회합니다 (이메일, 계정 상태 등 포함)
+    - 타인의 정보는 조회할 수 없습니다
+  operationId: getCurrentUser
+  responses:
+    '200':
+      description: 사용자 정보 조회 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '../resource.yaml#/PrivateResource'
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
