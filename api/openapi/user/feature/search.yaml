@@ -10,6 +10,7 @@ Get:
     이 엔드포인트는 주로 회원가입/프로필 수정 시 ID/닉네임 중복 확인에 사용됩니다.
     특정 loginId로 검색 시 결과가 없으면 해당 ID가 사용 가능하다는 의미입니다.
   operationId: searchUsers
+  security: []
   parameters:
     - name: filter
       in: query
