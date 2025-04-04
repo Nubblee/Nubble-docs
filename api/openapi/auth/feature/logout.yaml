@@ -1,6 +1,6 @@
 Post:
   tags:
-    - 인증 API
+    - Auth API
   summary: 로그아웃
   description: |
     현재 세션을 종료하고 인증 상태를 해제합니다.

@@ -1,6 +1,6 @@
 Post:
   tags:
-    - 인증 API
+    - Auth API
   summary: 로그인
   description: 사용자 인증 및 세션 생성
   operationId: login
