@@ -25,6 +25,9 @@ paths:
       $ref: './user/feature/register.yaml#/Post'
     get:
       $ref: './user/feature/search.yaml#/Get'
+  /users/{userId}:
+    patch:
+      $ref: './user/feature/update.yaml#/Patch'
 
   # 인증 API
   /auth/login:

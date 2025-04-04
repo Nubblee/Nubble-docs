@@ -1,7 +1,7 @@
 Get:
   tags:
-    - 유저 API
-  summary: 유저 검색 (loginId/nickname만 가능)
+    - 사용자 API
+  summary: 사용자 검색 (loginId/nickname만 가능)
   description: |
     loginId 또는 nickname으로 사용자를 검색합니다.
     보안상의 이유로 최소 하나의 검색 조건(loginId 또는 nickname)이 반드시 필요하며,

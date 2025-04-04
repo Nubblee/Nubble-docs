@@ -1,0 +1,94 @@
+# 사용자 정보 업데이트
+Patch:
+  tags:
+    - 사용자 API
+  summary: 사용자 정보 업데이트
+  description: |
+    로그인한 사용자의 프로필 정보를 업데이트합니다.
+    
+    - 업데이트 가능한 필드: nickname, email, profileImage, preferredRegion
+    - JSON:API 표준에 따라 변경하려는 필드만 요청에 포함해야 합니다
+      - 변경하지 않을 필드는 요청에 포함하지 마세요 (부분 업데이트)
+    - 자신의 정보만 업데이트할 수 있습니다 (타인의 정보 업데이트 불가)
+    - email 변경 시 이메일 인증 상태가 미인증(false)으로 변경됩니다
+  operationId: updateUser
+  parameters:
+    - name: userId
+      in: path
+      required: true
+      description: 업데이트할 사용자의 고유 식별자
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '200':
+      description: 사용자 정보 업데이트 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '../resource.yaml#/PrivateResource'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '403':
+      description: 권한 없음 (타인의 정보 업데이트 시도)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ForbiddenError'
+    '404':
+      description: 사용자를 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+    '409':
+      description: 이미 존재하는 이메일
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ConflictError'
+
+
+
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../type.yaml#/Type'
+        id:
+          $ref: '../attributes.yaml#/UserId'
+        attributes:
+          description: |
+            업데이트할 사용자 속성
+            변경하려는 필드만 포함하세요. 변경하지 않을 필드는 생략하세요.
+          type: object
+          properties:
+            email:
+              $ref: '../attributes.yaml#/Email'
+            nickname:
+              $ref: '../attributes.yaml#/Nickname'
+            profileImage:
+              $ref: '../attributes.yaml#/ProfileImage'
+            preferredRegion:
+              $ref: '../attributes.yaml#/PreferredRegion'
+          additionalProperties: false
+      required:
+        - type
+        - id
+      additionalProperties: false
+  required:
+    - data
+  additionalProperties: false

@@ -1,7 +1,7 @@
 # 사용자 등록
 Post:
   tags:
-    - 유저 API
+    - 사용자 API
   summary: 회원가입
   description: 새로운 사용자 계정을 생성합니다
   operationId: registerUser
