@@ -1,4 +1,4 @@
-Resource:
+PrivateResource:
   type: object
   properties:
     data:
@@ -38,3 +38,26 @@ Resource:
         - type
   required:
     - data
+
+
+PublicResource:
+  type: object
+  properties:
+    type:
+      $ref: './type.yaml#/Type'
+    id:
+      $ref: './attributes.yaml#/UserId'
+    attributes:
+      type: object
+      properties:
+        nickname:
+          $ref: './attributes.yaml#/Nickname'
+        profileImage:
+          $ref: './attributes.yaml#/ProfileImage'
+        preferredRegion:
+          $ref: './attributes.yaml#/PreferredRegion'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './links.yaml#/Self'

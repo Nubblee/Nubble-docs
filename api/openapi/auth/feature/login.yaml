@@ -1,43 +1,42 @@
-Path:
-  post:
-    tags:
-      - 인증 API
-    summary: 로그인
-    description: 사용자 인증 및 세션 생성
-    operationId: login
-    security: []
-    requestBody:
-      required: true
+Post:
+  tags:
+    - 인증 API
+  summary: 로그인
+  description: 사용자 인증 및 세션 생성
+  operationId: login
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+
+  responses:
+    '200':
+      description: 로그인 성공
+      headers:
+        Auth-Session-Id:
+          description: |
+            인증 세션 ID (이후 모든 인증 요청에 포함되어야 함)
+          schema:
+            $ref: '../session/attributes.yaml#/SessionId'
       content:
         application/vnd.api+json:
           schema:
-            $ref: '#/Request'
-
-    responses:
-      '200':
-        description: 로그인 성공
-        headers:
-          Auth-Session-Id:
-            description: |
-              인증 세션 ID (이후 모든 인증 요청에 포함되어야 함)
-            schema:
-              $ref: '../session/attributes.yaml#/SessionId'
-        content:
-          application/vnd.api+json:
-            schema:
-              $ref: '../session/resource.yaml#/Resource'
-      '400':
-        description: 유효하지 않은 입력값
-        content:
-          application/problem+json:
-            schema:
-              $ref: '../../error/types.yaml#/ValidationError'
-      '401':
-        description: 인증 실패
-        content:
-          application/problem+json:
-            schema:
-              $ref: '../../error/types.yaml#/InvalidCredentialsError'
+            $ref: '../session/resource.yaml#/Resource'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '401':
+      description: 인증 실패
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/InvalidCredentialsError'
 
 
 Request:

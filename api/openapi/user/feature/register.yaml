@@ -1,44 +1,43 @@
 # 사용자 등록
-Path:
-  post:
-    tags:
-      - 유저 API
-    summary: 회원가입
-    description: 새로운 사용자 계정을 생성합니다
-    operationId: registerUser
-    security: []
-    requestBody:
-      required: true
+Post:
+  tags:
+    - 유저 API
+  summary: 회원가입
+  description: 새로운 사용자 계정을 생성합니다
+  operationId: registerUser
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '201':
+      description: 회원가입 성공
+      headers:
+        Location:
+          description: 생성된 사용자 리소스의 URI
+          schema:
+            type: string
+            format: uri
+          example: "/users/123"
       content:
         application/vnd.api+json:
           schema:
-            $ref: '#/Request'
-    responses:
-      '201':
-        description: 회원가입 성공
-        headers:
-          Location:
-            description: 생성된 사용자 리소스의 URI
-            schema:
-              type: string
-              format: uri
-            example: "/users/123"
-        content:
-          application/vnd.api+json:
-            schema:
-              $ref: '../resource.yaml#/Resource'
-      '400':
-        description: 유효하지 않은 입력값
-        content:
-          application/problem+json:
-            schema:
-              $ref: '../../error/types.yaml#/ValidationError'
-      '409':
-        description: 이미 존재하는 사용자명 또는 이메일
-        content:
-          application/problem+json:
-            schema:
-              $ref: '../../error/types.yaml#/ConflictError'
+            $ref: '../resource.yaml#/PrivateResource'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '409':
+      description: 이미 존재하는 사용자명 또는 이메일
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ConflictError'
 
 Request:
   allOf:

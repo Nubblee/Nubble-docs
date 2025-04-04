@@ -1,0 +1,70 @@
+Get:
+  tags:
+    - 유저 API
+  summary: 유저 검색 (loginId/nickname만 가능)
+  description: |
+    loginId 또는 nickname으로 사용자를 검색합니다.
+    보안상의 이유로 최소 하나의 검색 조건(loginId 또는 nickname)이 반드시 필요하며,
+    아무 조건 없이 전체 사용자를 검색하는 것은 허용되지 않습니다.
+    
+    이 엔드포인트는 주로 회원가입/프로필 수정 시 ID/닉네임 중복 확인에 사용됩니다.
+    특정 loginId로 검색 시 결과가 없으면 해당 ID가 사용 가능하다는 의미입니다.
+  operationId: searchUsers
+  parameters:
+    - name: filter
+      in: query
+      required: true
+      description: |
+        사용자 필터링 조건 (최소 하나의 필터 조건 필요)
+        
+        사용 가능한 필터:
+        - filter[loginId] - 로그인 ID로 정확히 일치하는 사용자 검색
+        - filter[nickname] - 닉네임으로 정확히 일치하는 사용자 검색
+        
+        예시:
+        - filter[loginId]=hongkildong
+        - filter[nickname]=홍길동
+      schema:
+        type: object
+      example: "filter[loginId]=hongkildong"
+    - name: limit
+      in: query
+      required: false
+      description: |
+        반환할 항목 수 (고정값: 1)
+        중복 확인 목적에 최적화되어 있습니다.
+      schema:
+        type: integer
+        enum: [ 1 ]
+        default: 1
+        example: 1
+  responses:
+    '200':
+      description: 검색 결과 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/Response'
+    '400':
+      description: 유효하지 않은 필터 조건 또는 요청 형식 (필터 없이 검색 시도 등)
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: '../../error/types.yaml#/ValidationError'
+              - type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "최소 하나의 검색 조건(loginId 또는 nickname)이 필요합니다."
+
+
+Response:
+  type: object
+  properties:
+    data:
+      type: array
+      description: 검색 결과 사용자 목록 (최대 1개)
+      items:
+        $ref: '../resource.yaml#/PublicResource'
+

@@ -21,10 +21,15 @@ components:
 paths:
   # 사용자 API
   /users:
-    $ref: './user/feature/register.yaml#/Path'
+    post:
+      $ref: './user/feature/register.yaml#/Post'
+    get:
+      $ref: './user/feature/search.yaml#/Get'
 
   # 인증 API
   /auth/login:
-    $ref: './auth/feature/login.yaml#/Path'
+    post:
+      $ref: './auth/feature/login.yaml#/Post'
   /auth/logout:
-    $ref: './auth/feature/logout.yaml#/Path'
+      post:
+        $ref: './auth/feature/logout.yaml#/Post'
