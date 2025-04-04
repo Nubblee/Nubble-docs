@@ -37,7 +37,9 @@ paths:
   /users/me:
     get:
       $ref: './user/feature/get-current.yaml#/Get'
-
+  /users/{userId}/profile-image:
+    post:
+      $ref: './user/feature/update-profile-image.yaml#/Post'
 
   # 인증 API
   /auth/login:
