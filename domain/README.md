@@ -84,11 +84,11 @@ flowchart LR
 
 ### 스터디 생명주기
 ```mermaid
-stateDiagram-v2 
-    direction LR
-    [*] --> 모집중 
-    모집중 --> 진행중
-    진행중 --> 종료
+stateDiagram-v2
+direction LR
+    [*] --> 진행중: 스터디 개설
+    진행중 --> 종료: 스터디 종료
+    종료 --> 진행중: 스터디 재개
 ```
 
 ### 문제 풀이 생명주기
