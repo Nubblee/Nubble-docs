@@ -10,16 +10,16 @@
 - 여러 스터디에 동시에 참여 가능
 - 스터디별로 서로 다른 역할 보유 가능(한 스터디에서는 스터디장, 다른 스터디에서는 스터디원)
 
-| 속성 | 타입 | 설명 |
-|:---|:---|:---|
-| id | String | 유저 식별자 |
-| username | String | 사용자 이름(로그인 ID) - 고유값 |
-| email | String | 이메일 주소 - 고유값 |
+| 속성            | 타입 | 설명 |
+|:--------------|:---|:---|
+| id            | String | 유저 식별자 |
+| loginId       | String | 사용자 이름(로그인 ID) - 고유값 |
+| email         | String | 이메일 주소 - 고유값 |
 | emailVerified | Boolean | 이메일 인증 완료 여부 |
-| password | String | 비밀번호 |
-| nickname | String | 닉네임, 활동 이름 |
-| profileImage | String | 프로필 이미지 URL |
-| region | String | 지역 정보 (시/도 + 시/군/구 수준) |
+| password      | String | 비밀번호 |
+| nickname      | String | 닉네임, 활동 이름 |
+| profileImage  | String | 프로필 이미지 URL |
+| region        | String | 지역 정보 (시/도 + 시/군/구 수준) |
 | accountStatus | Enum | 계정 상태(ACTIVE/INACTIVE/SUSPENDED/DORMANT/WITHDRAWN) |
 
 **참고:**
@@ -48,7 +48,7 @@
 
 ## 비즈니스 규칙
 
-- 유저는 username(로그인 ID)을(를) 통해 고유하게 식별됨
+- 유저는 loginId(로그인 ID)을(를) 통해 고유하게 식별됨
 - 비밀번호는 충분한 보안 강도를 갖추어야 함 (구체적인 규칙은 구현 단계에서 결정)
 - 유저의 이메일은 고유해야 함 - 1 아이디당 1 이메일로 중복 가입 방지
 - 유저는 언제든지 탈퇴 가능하나, 활성화된 스터디장인 경우 권한 양도 후 탈퇴 가능
