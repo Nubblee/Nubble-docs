@@ -1,0 +1,136 @@
+# 스터디 그룹 업데이트
+Patch:
+  tags:
+    - Study Group API
+  summary: 스터디 그룹 정보 업데이트
+  description: |
+    스터디 그룹의 기본 정보를 업데이트합니다.
+    
+    - 스터디장만 스터디 정보를 수정할 수 있습니다
+    - JSON:API 표준에 따라 변경하려는 필드만 요청에 포함해야 합니다
+    - 종료(ENDED) 상태의 스터디는 수정할 수 없습니다:
+      - 종료된 스터디는 기록으로 간주되어 변경이 불가능합니다
+      - 종료된 스터디의 정보를 변경하려면 먼저 reopenStudy API를 통해 재개해야 합니다
+    - 비즈니스 규칙:
+      - mainLanguage는 반드시 languages 목록에 포함된 언어여야 합니다 (422 오류)
+      - 스터디 용량(capacity)은 현재 멤버 수보다 적게 설정할 수 없습니다 (422 오류)
+  operationId: updateStudyGroup
+  parameters:
+    - name: studyGroupId
+      in: path
+      required: true
+      description: 업데이트할 스터디 그룹의 고유 식별자
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '200':
+      description: 스터디 그룹 업데이트 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '../resource.yaml#/Resource'
+    '400':
+      description: 유효하지 않은 입력값 (형식 오류, 필수 필드 누락 등)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+          example:
+              type: "about:blank"
+              title: "유효하지 않은 입력"
+              status: 400
+              detail: "요청에 유효하지 않은 데이터가 포함되어 있습니다"
+              errors:
+                - field: "startDate"
+                  message: "올바른 날짜 형식이 아닙니다 (YYYY-MM-DD 형식이어야 함)"
+                - field: "capacity"
+                  message: "정수 값이어야 합니다"
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
+    '403':
+      description: 권한 없음 (스터디장이 아니거나 종료된 스터디인 경우)
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: '../../error/types.yaml#/ForbiddenError'
+              - type: object
+                properties:
+                  detail:
+                    type: string
+                    examples:
+                      unauthorized: "이 스터디의 스터디장만 정보를 수정할 수 있습니다"
+                      ended: "종료된 스터디는 수정할 수 없습니다. 스터디를 재개한 후 수정해주세요"
+    '404':
+      description: 스터디 그룹을 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+    '422':
+      description: 비즈니스 규칙 위반
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnprocessableEntityError'
+
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../type.yaml#/Type'
+        id:
+          $ref: '../attribute.yaml#/StudyGroupId'
+        attributes:
+          type: object
+          description: |
+            업데이트할 스터디 그룹 속성
+            변경하려는 필드만 포함하세요. 변경하지 않을 필드는 생략하세요.
+          properties:
+            name:
+              $ref: '../attribute.yaml#/Name'
+            description:
+              $ref: '../attribute.yaml#/Description'
+            capacity:
+              $ref: '../attribute.yaml#/Capacity'
+            startDate:
+              $ref: '../attribute.yaml#/StartDate'
+            endDate:
+              $ref: '../attribute.yaml#/EndDate'
+            languages:
+              $ref: '../attribute.yaml#/Languages'
+            mainLanguage:
+              $ref: '../attribute.yaml#/MainLanguage'
+            difficultyLevels:
+              $ref: '../attribute.yaml#/DifficultyLevels'
+            problemPlatforms:
+              $ref: '../attribute.yaml#/ProblemPlatforms'
+            meetingType:
+              $ref: '../attribute.yaml#/MeetingType'
+            meetingRegion:
+              $ref: '../attribute.yaml#/MeetingRegion'
+            mainMeetingDays:
+              $ref: '../attribute.yaml#/MainMeetingDays'
+          additionalProperties: false
+      required:
+        - type
+        - id
+        - attributes
+      additionalProperties: false
+  required:
+    - data
+  additionalProperties: false
