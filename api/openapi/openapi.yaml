@@ -58,3 +58,6 @@ paths:
   /study-groups/{studyGroupId}:
     patch:
       $ref: './study-group/feature/update.yaml#/Patch'
+  /study-groups/{studyGroupId}/end:
+    post:
+      $ref: './study-group/feature/end.yaml#/Post'
