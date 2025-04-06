@@ -1,0 +1,49 @@
+Resource:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        id:
+          $ref: './attribute.yaml#/StudyGroupId'
+        type:
+          $ref: './type.yaml#/Type'
+        attributes:
+          type: object
+          properties:
+            name:
+              $ref: './attribute.yaml#/Name'
+            description:
+              $ref: './attribute.yaml#/Description'
+            capacity:
+              $ref: './attribute.yaml#/Capacity'
+            startDate:
+              $ref: './attribute.yaml#/StartDate'
+            endDate:
+              $ref: './attribute.yaml#/EndDate'
+            status:
+              $ref: './attribute.yaml#/Status'
+            languages:
+              $ref: './attribute.yaml#/Languages'
+            mainLanguage:
+              $ref: './attribute.yaml#/MainLanguage'
+            difficultyLevels:
+              $ref: './attribute.yaml#/DifficultyLevels'
+            problemPlatforms:
+              $ref: './attribute.yaml#/ProblemPlatforms'
+            meetingType:
+              $ref: './attribute.yaml#/MeetingType'
+            meetingRegion:
+              $ref: './attribute.yaml#/MeetingRegion'
+            mainMeetingDays:
+              $ref: './attribute.yaml#/MainMeetingDays'
+        links:
+          type: object
+          properties:
+            self:
+              $ref: './link.yaml#/Self'
+      required:
+        - id
+        - type
+  required:
+    - data

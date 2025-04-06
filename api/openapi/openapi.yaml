@@ -23,6 +23,8 @@ tags:
     description: 사용자 계정 관리 관련 API
   - name: Auth API
     description: 로그인, 로그아웃 등 사용자 인증 관련 API
+  - name: Study Group API
+    description: 스터디 그룹 관련 API
 
 paths:
   # 사용자 API
@@ -46,5 +48,10 @@ paths:
     post:
       $ref: './auth/feature/login.yaml#/Post'
   /auth/logout:
-      post:
-        $ref: './auth/feature/logout.yaml#/Post'
+    post:
+      $ref: './auth/feature/logout.yaml#/Post'
+
+  # 스터디 그룹 API
+  /study-groups:
+    post:
+      $ref: './study-group/feature/create.yaml#/Post'

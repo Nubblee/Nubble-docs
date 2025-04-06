@@ -1,0 +1,99 @@
+# 스터디 그룹 속성 필드
+StudyGroupId:
+  type: string
+  description: 스터디 그룹 고유 식별자
+  example: "123"
+
+Name:
+  type: string
+  description: 스터디 이름
+  example: "알고리즘 마스터 스터디"
+  minLength: 2
+  maxLength: 50
+
+Description:
+  type: string
+  description: 스터디 설명
+  example: "프로그래머스와 백준 알고리즘 문제를 함께 풀며 성장하는 스터디입니다."
+  maxLength: 500
+
+Capacity:
+  type: integer
+  description: 최대 인원
+  example: 10
+  minimum: 2
+  maximum: 30
+
+StartDate:
+  type: string
+  format: date
+  description: 시작일
+  example: "2025-05-01"
+
+EndDate:
+  type: string
+  format: date
+  description: 종료일 (미정인 경우 null)
+  example: "2025-08-31"
+  nullable: true
+
+Status:
+  type: string
+  enum: [ACTIVE, ENDED]
+  description: 스터디 상태 (진행중/종료)
+  example: "ACTIVE"
+
+Languages:
+  type: array
+  description: 사용 프로그래밍 언어 목록
+  items:
+    type: string
+    enum: [JAVA, PYTHON, CPP, JAVASCRIPT, TYPESCRIPT, GO, RUBY, KOTLIN, OTHER]
+  minItems: 1
+  example: ["JAVA", "PYTHON"]
+
+MainLanguage:
+  type: string
+  enum: [JAVA, PYTHON, CPP, JAVASCRIPT, TYPESCRIPT, GO, RUBY, KOTLIN, OTHER]
+  description: 대표 프로그래밍 언어
+  example: "JAVA"
+
+DifficultyLevels:
+  type: array
+  description: 풀이 대상 난이도 레벨 목록
+  items:
+    type: string
+    enum: [LV0, LV1, LV2, LV3, LV4]
+  minItems: 1
+  example: ["LV1", "LV2"]
+
+ProblemPlatforms:
+  type: array
+  description: 문제 풀이 사이트 목록
+  items:
+    type: string
+    enum: [PROGRAMMERS, BAEKJOON, LEETCODE, CODETREE, OTHER]
+  minItems: 1
+  example: ["PROGRAMMERS", "BAEKJOON"]
+
+MeetingType:
+  type: string
+  enum: [ONLINE, OFFLINE, HYBRID]
+  description: 모임 방식
+  example: "ONLINE"
+
+MeetingRegion:
+  type: string
+  description: 스터디 모임 지역 (시/도, 시/군/구), '/'로 구분 (오프라인/하이브리드 모임에 필요)
+  example: "서울시/강남구"
+  maxLength: 30
+  nullable: true
+
+MainMeetingDays:
+  type: array
+  description: 대표 모임 요일
+  items:
+    type: string
+    enum: [MON, TUE, WED, THU, FRI, SAT, SUN]
+  minItems: 1
+  example: ["MON", "WED", "FRI"]

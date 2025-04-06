@@ -1,0 +1,5 @@
+# JSON:API 스터디 그룹 타입
+Type:
+  type: string
+  enum: [study-groups]
+  default: study-groups

@@ -1,0 +1,99 @@
+# 스터디 그룹 생성
+Post:
+  tags:
+    - Study Group API
+  summary: 스터디 그룹 생성
+  description: |
+    새로운 스터디 그룹을 생성합니다.
+    
+    - 모든 필수 정보를 포함해야 합니다
+    - 생성자는 자동으로 스터디장 역할을 부여받습니다
+    - 생성 시 스터디 그룹은 '진행중(ACTIVE)' 상태로 시작됩니다
+  operationId: createStudyGroup
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '201':
+      description: 스터디 그룹 생성 성공
+      headers:
+        Location:
+          description: 생성된 스터디 그룹 리소스의 URI
+          schema:
+            type: string
+            format: uri
+          example: "/study-groups/123"
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '../resource.yaml#/Resource'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../type.yaml#/Type'
+        attributes:
+          type: object
+          description: 스터디 그룹 생성 시 필요한 속성
+          properties:
+            name:
+              $ref: '../attribute.yaml#/Name'
+            description:
+              $ref: '../attribute.yaml#/Description'
+            capacity:
+              $ref: '../attribute.yaml#/Capacity'
+            startDate:
+              $ref: '../attribute.yaml#/StartDate'
+            endDate:
+              $ref: '../attribute.yaml#/EndDate'
+            languages:
+              $ref: '../attribute.yaml#/Languages'
+            mainLanguage:
+              $ref: '../attribute.yaml#/MainLanguage'
+            difficultyLevels:
+              $ref: '../attribute.yaml#/DifficultyLevels'
+            problemPlatforms:
+              $ref: '../attribute.yaml#/ProblemPlatforms'
+            meetingType:
+              $ref: '../attribute.yaml#/MeetingType'
+            meetingRegion:
+              $ref: '../attribute.yaml#/MeetingRegion'
+            mainMeetingDays:
+              $ref: '../attribute.yaml#/MainMeetingDays'
+          required:
+            - name
+            - capacity
+            - startDate
+            - languages
+            - mainLanguage
+            - difficultyLevels
+            - problemPlatforms
+            - meetingType
+            - mainMeetingDays
+          additionalProperties: false
+      required:
+        - type
+        - attributes
+      additionalProperties: false
+  required:
+    - data
+  additionalProperties: false

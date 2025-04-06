@@ -102,14 +102,10 @@ UnauthenticatedError:
       $ref: './schemas.yaml#/Title'
     status:
       $ref: './schemas.yaml#/Status'
-    required:
-      - type
-      - title
-      - status
-    example:
-      type: "about:blank"
-      title: "인증 필요"
-      status: 401
+  example:
+    type: "about:blank"
+    title: "인증 필요"
+    status: 401
 
 # 권한 부족으로 인한 403 Forbidden 응답을 위한 오류 스키마
 ForbiddenError:
