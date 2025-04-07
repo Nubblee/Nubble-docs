@@ -61,3 +61,7 @@ paths:
   /study-groups/{studyGroupId}/end:
     post:
       $ref: './study-group/feature/end.yaml#/Post'
+  /study-groups/{studyGroupId}/reopen:
+    post:
+      $ref: './study-group/feature/reopen.yaml#/Post'
+
