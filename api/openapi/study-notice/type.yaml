@@ -1,0 +1,4 @@
+Type:
+  type: string
+  enum: [study-notices]
+  default: study-notices

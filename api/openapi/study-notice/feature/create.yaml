@@ -1,0 +1,106 @@
+Post:
+  tags:
+    - Study Notice API
+  summary: 스터디 공지사항 작성
+  description: |
+    새로운 스터디 공지사항을 작성합니다.
+    
+    - 스터디장만 공지사항을 작성할 수 있습니다
+    - 공지사항 생성 시 isPinned 값을 true로 설정하여 상단 고정 가능 (기본값: false)
+    - 상단 고정은 최대 3개까지만 가능합니다
+    - isPinned 값을 true로 설정했는데 이미 최대 개수(3개)의 고정 공지사항이 있는 경우 422 오류 발생
+  operationId: createStudyNotice
+  parameters:
+    - name: studyGroupId
+      in: path
+      required: true
+      description: 공지사항을 작성할 스터디 그룹의 고유 식별자
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '201':
+      description: 공지사항 작성 성공
+      headers:
+        Location:
+          description: 생성된 공지사항 리소스의 URI
+          schema:
+            type: string
+            format: uri
+          example: "/study-groups/123/notices/456"
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '../resource.yaml#/Resource'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
+    '403':
+      description: 권한 없음 (스터디장이 아닌 경우)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ForbiddenError'
+    '404':
+      description: 스터디 그룹을 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+    '422':
+      description: 비즈니스 규칙 위반 (최대 고정 개수 초과)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnprocessableEntityError'
+          example:
+            type: "about:blank"
+            title: "비즈니스 규칙 위반"
+            status: 422
+            detail: "이미 최대 개수(3개)의 고정 공지사항이 있어 추가 고정이 불가능합니다"
+            violationField: "isPinned"
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../type.yaml#/Type'
+        attributes:
+          type: object
+          properties:
+            title:
+              $ref: '../attribute.yaml#/Title'
+            content:
+              $ref: '../attribute.yaml#/Content'
+            isPinned:
+              allOf:
+                - $ref: '../attribute.yaml#/IsPinned'
+              default: false
+          required:
+            - title
+            - content
+          additionalProperties: false
+      required:
+        - type
+        - attributes
+      additionalProperties: false
+  required:
+    - data
+  additionalProperties: false

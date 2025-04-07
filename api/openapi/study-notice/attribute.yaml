@@ -1,0 +1,40 @@
+NoticeId:
+  type: string
+  description: 공지사항 고유 식별자
+  example: "123"
+
+AuthorId:
+  type: string
+  description: 공지사항 작성자의 ID
+  example: "123"
+
+Title:
+  type: string
+  description: 공지사항 제목
+  example: "이번 주 스터디 일정 변경 안내"
+  minLength: 1
+  maxLength: 100
+
+Content:
+  type: string
+  description: 공지사항 내용
+  example: "이번 주 스터디는 목요일 저녁 8시로 변경되었습니다. 모두 참석 부탁드립니다."
+  maxLength: 5000
+
+IsPinned:
+  type: boolean
+  description: 공지사항 상단 고정 여부
+  example: false
+
+CreatedAt:
+  type: string
+  format: date-time
+  description: 공지사항 작성 일시
+  example: "2025-05-01T14:30:00Z"
+
+UpdatedAt:
+  type: string
+  format: date-time
+  description: 공지사항 수정 일시
+  example: "2025-05-02T09:15:00Z"
+

@@ -25,6 +25,8 @@ tags:
     description: 로그인, 로그아웃 등 사용자 인증 관련 API
   - name: Study Group API
     description: 스터디 그룹 관련 API
+  - name: Study Notice API
+    description: 스터디 공지사항 관련 API
 
 paths:
   # 사용자 API
@@ -67,3 +69,8 @@ paths:
   /study-groups/{studyGroupId}/membership:
     delete:
       $ref: './study-group/feature/leave.yaml#/Delete'
+
+  # 스터디 공지사항 API
+  /study-groups/{studyGroupId}/notices:
+    post:
+      $ref: './study-notice/feature/create.yaml#/Post'
