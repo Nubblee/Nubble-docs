@@ -7,7 +7,11 @@ Post:
     스터디 그룹의 상태를 '진행중(ACTIVE)'에서 '종료(ENDED)'로 변경합니다.
     
     - 스터디장만 스터디를 종료할 수 있습니다
-    - 이미 종료된 스터디는 다시 종료할 수 없습니다 (409 오류)
+    - 이미 종료된 스터디에 대해서도 200 OK 응답이 반환됩니다
+      - 이 API는 '목표 상태(desired state)' 패턴을 사용합니다:
+        - 요청의 의도: "이 스터디를 종료 상태로 만들어 주세요"
+        - 응답: 스터디가 종료 상태라면 성공(200 OK)으로 간주
+    
     - 종료된 스터디는 아카이브 성격을 띠며, 학습 결과물을 보존하고 참조하는 것에 중점을 둡니다
     - 종료된 스터디는 추후 스터디장이 `reopen` API를 통해 재개할 수 있습니다
     - 종료된 스터디는 다음과 같은 제약이 있습니다:
@@ -35,7 +39,7 @@ Post:
           $ref: '#/Request'
   responses:
     '200':
-      description: 스터디 그룹 종료 성공
+      description: 스터디 그룹 종료 성공 (이미 종료된 상태라도 성공 응답 반환)
       content:
         application/vnd.api+json:
           schema:
@@ -63,20 +67,6 @@ Post:
         application/problem+json:
           schema:
             $ref: '../../error/types.yaml#/NotFoundError'
-    '409':
-      description: 이미 종료된 스터디
-      content:
-        application/problem+json:
-          schema:
-              $ref: '../../error/types.yaml#/ConflictError'
-          example:
-            type: about:blank
-            title: 리소스 충돌
-            status: 409
-            detail: "이미 종료된 스터디입니다"
-            conflictField: "status"
-            conflictValue: "ENDED"
-            resourceType: "study-group"
 
 Request:
   type: object

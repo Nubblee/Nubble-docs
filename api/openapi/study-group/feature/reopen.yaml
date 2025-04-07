@@ -7,7 +7,11 @@ Post:
     종료(ENDED) 상태의 스터디 그룹을 진행 중(ACTIVE) 상태로 재개합니다.
     
     - 스터디장만 스터디를 재개할 수 있습니다
-    - 이미 활성화(ACTIVE) 상태인 스터디에 대해 이 API를 호출하면 아무 변화 없이 현재 상태가 반환됩니다 (멱등성 보장)
+    - 이미 활성화(ACTIVE) 상태인 스터디에 대해 이 API를 호출해도 200 OK 응답이 반환됩니다
+      - 이 API는 '목표 상태(desired state)' 패턴을 사용합니다:
+        - 요청의 의도: "이 스터디를 활성 상태로 만들어 주세요"
+        - 응답: 스터디가 활성 상태라면 성공(200 OK)으로 간주
+    
     - 재개되면 종료 상태에서 불가했던 모든 기능(정보 수정, 문제 등록, 일정 추가 등)을 다시 사용할 수 있습니다
   operationId: reopenStudyGroup
   parameters:
@@ -25,7 +29,7 @@ Post:
           $ref: '#/Request'
   responses:
     '200':
-      description: 스터디 그룹 재개 성공
+      description: 스터디 그룹 재개 성공 (이미 활성화된 상태라도 성공 응답 반환)
       content:
         application/vnd.api+json:
           schema:
