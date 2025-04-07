@@ -32,44 +32,6 @@ ValidationError:
       - field: 유효성 검사에 실패한 필드
         message: 해당 필드에 대한 오류 메시지
 
-# 리소스 중복/충돌로 인한 409 Conflict 응답을 위한 오류 스키마
-ConflictError:
-  type: object
-  description: |
-    리소스 충돌 오류를 표현하기 위한 확장 스키마입니다.
-    주로 고유성이 보장되어야 하는 필드(사용자명, 이메일, 스터디명 등)가 
-    이미 사용 중일 때 발생합니다.
-  properties:
-    type:
-      $ref: './schemas.yaml#/Type'
-    title:
-      $ref: './schemas.yaml#/Title'
-    status:
-      $ref: './schemas.yaml#/Status'
-    conflictField:
-      type: string
-      description: |
-        충돌이 발생한 필드명을 나타냅니다.
-        예: 'username', 'email', 'name' 등
-        클라이언트는 이 값을 기준으로 사용자에게 적절한 오류 메시지를 표시할 수 있습니다.
-      example: 충돌이 발생한 필드명
-    conflictValue:
-      type: string
-      description: 충돌을 일으킨 값
-    resourceType:
-      type: string
-      description: |
-        충돌이 발생한 리소스 유형을 나타냅니다.
-        예: 'user', 'study', 'solution' 등
-        다양한 리소스에서 동일한 필드명이 사용될 경우 충돌을 정확히 식별하는 데 도움이 됩니다.
-  example:
-    type: about:blank
-    title: 리소스 충돌
-    status: 409
-    conflictField: 충돌이 발생한 필드명
-    conflictValue: 충돌을 일으킨 값
-    resourceType: 충돌이 발생한 리소스 유형
-
 # 로그인 시도 실패 시 발생하는 401 Unauthorized 응답을 위한 오류 스키마
 InvalidCredentialsError:
   type: object
@@ -145,6 +107,66 @@ NotFoundError:
     title: "리소스를 찾을 수 없음"
     status: 404
 
+# 리소스 중복/충돌로 인한 409 Conflict 응답을 위한 오류 스키마
+ConflictError:
+  type: object
+  description: |
+    리소스 충돌 오류를 표현하기 위한 확장 스키마입니다.
+    
+    409 Conflict는 두 가지 주요 유형의 충돌을 다룹니다:
+    
+    1. **일시적인 충돌 (시스템 관련):**
+       - 동시성 문제로 인한 충돌 (여러 사용자가 동시에 같은 리소스 수정)
+       - 낙관적 락(Optimistic locking) 실패
+       - 일시적인 데이터 일관성 문제
+       - 특징: 잠시 후 재시도하면 성공할 수 있음
+    
+    2. **지속적인 충돌 (리소스 상태 관련):**
+       - 고유성 제약 조건 위반 (이미 사용 중인 이메일, 아이디 등)
+       - 리소스 상태 기반 충돌 (예: 스터디장이 진행 중인 스터디 탈퇴 시도)
+       - 특징: 클라이언트가 입력 값을 변경하거나, 리소스 상태를 먼저 변경해야 해결 가능
+    
+    409와 422의 주요 차이점:
+    - 409: 현재 리소스 상태와의 직접적인 충돌, 상태 변경 후 동일 요청 가능
+    - 422: 비즈니스 규칙 위반, 다른 입력 값으로 요청해야 함
+    
+    예시:
+    - 이미 사용 중인 이메일 → 409 (다른 이메일 선택)
+    - 진행 중인 스터디의 스터디장 탈퇴 시도 → 409 (먼저 권한 양도 후 탈퇴)
+    - 최신 버전이 아닌 데이터 수정 시도 → 409 (최신 데이터로 다시 시도)
+  properties:
+    type:
+      $ref: './schemas.yaml#/Type'
+    title:
+      $ref: './schemas.yaml#/Title'
+    status:
+      $ref: './schemas.yaml#/Status'
+    detail:
+      $ref: './schemas.yaml#/Detail'
+    conflictField:
+      type: string
+      description: |
+        충돌이 발생한 필드명을 나타냅니다.
+        예: 'loginId', 'email', 'name', 'role' 등
+        클라이언트는 이 값을 기준으로 사용자에게 적절한 오류 메시지를 표시할 수 있습니다.
+      example: 충돌이 발생한 필드명
+    conflictValue:
+      type: string
+      description: 충돌을 일으킨 값
+    resourceType:
+      type: string
+      description: |
+        충돌이 발생한 리소스 유형을 나타냅니다.
+        예: 'user', 'study', 'solution' 등
+        다양한 리소스에서 동일한 필드명이 사용될 경우 충돌을 정확히 식별하는 데 도움이 됩니다.
+  example:
+    type: about:blank
+    title: 리소스 충돌
+    status: 409
+    conflictField: 충돌이 발생한 필드명
+    conflictValue: 충돌을 일으킨 값
+    resourceType: 충돌이 발생한 리소스 유형
+
 # 파일 크기 초과 오류 (413 Payload Too Large)
 FileSizeTooLargeError:
   type: object
@@ -179,12 +201,28 @@ UnprocessableEntityError:
   type: object
   description: |
     요청이 문법적으로는 올바르지만 비즈니스 규칙을 위반한 경우 발생하는 오류입니다.
-    단일 필드의 단순 유효성 검사(400)가 아닌, 아래와 같은 상황에 사용됩니다:
+    
+    422 Unprocessable Entity는 다음과 같은 특징을 가집니다:
+    - 유효성 검사(400)는 통과했지만 비즈니스 로직에서 처리가 불가능한 경우
+    - 입력 값 자체가 비즈니스 규칙에 맞지 않아 실패, 다른 값으로는 성공할 수 있음
+    - 409(Conflict)와 달리 리소스 상태와의 충돌이 아닌 도메인 규칙 위반
+    - 제출된 데이터 자체의 문제로, 동일한 리소스의 상태를 변경해도 해결되지 않음
+    
+    다음과 같은 상황에 사용됩니다:
     - 필드 간 관계 규칙 위반 (예: 대표 언어가 언어 목록에 없음)
-    - 상태 기반 규칙 위반 (예: 스터디 인원 수가 현재 멤버 수보다 작음)
-    - 도메인 특화 규칙 위반 (예: 동일 시간대 중복 일정 등록)
+    - 수치 기반 규칙 위반 (예: 최소 주문 금액 미달)
+    - 데이터 형식 규칙 위반 (예: 유효하지 않은 주민등록번호 형식)
     - 외부 시스템 종속 규칙 위반 (예: 결제 시스템에서 거부된 결제)
-    - 단일 필드 의미적 규칙 위반 (예: 유효하지 않은 사업자 등록번호)
+    - 의미적 규칙 위반 (예: 종료일이 시작일보다 이전)
+    
+    예시:
+    - 대표 언어가 언어 목록에 없음 → 422 (언어 목록에 포함된 언어 선택)
+    - 현재 멤버 수보다 적은 인원 수 설정 → 422 (더 큰 값 설정)
+    - 종료일이 시작일보다 이전 → 422 (올바른 날짜 범위 설정)
+    
+    409 vs 422 주요 차이점:
+    - 409: 제출된 데이터는 유효하나 리소스 상태와 충돌 (상태 변경으로 해결 가능)
+    - 422: 제출된 데이터 자체가 비즈니스 규칙 위반 (다른 데이터 제출 필요)
     
     한 번에 하나의 규칙 위반만 반환합니다. 첫 번째 위반 사항이 발견되면 즉시 오류를 반환합니다.
   properties:
@@ -202,17 +240,14 @@ UnprocessableEntityError:
       description: |
         규칙 위반과 관련된 주요 필드
         예: 'mainLanguage', 'capacity' 등
-      example: "mainLanguage"
     message:
       type: string
       description: 규칙 위반에 대한 상세 설명
-      example: "대표 언어는 반드시 languages 목록에 포함되어야 합니다"
     resourceType:
       type: string
       description: |
         비즈니스 규칙 위반이 발생한 리소스 유형
         예: 'user', 'study-group', 'solution' 등
-      example: "study-group"
     relatedFields:
       type: array
       description: |
@@ -220,7 +255,6 @@ UnprocessableEntityError:
         필드 간 관계 검증 시 유용
       items:
         type: string
-      example: ["languages"]
   example:
     type: "about:blank"
     title: "비즈니스 규칙 위반"
