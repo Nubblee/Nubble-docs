@@ -14,7 +14,10 @@ Resource:
             expiresAt:
               $ref: './attributes.yaml#/ExpiresAt'
         relationships:
-          $ref: '../../user/relationship.yaml#/User'
+            type: object
+            properties:
+              user:
+                $ref: '../../user/relationship.yaml#/User'
     meta:
       type: object
       properties:
