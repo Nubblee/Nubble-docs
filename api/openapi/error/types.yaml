@@ -185,54 +185,48 @@ UnprocessableEntityError:
     - 도메인 특화 규칙 위반 (예: 동일 시간대 중복 일정 등록)
     - 외부 시스템 종속 규칙 위반 (예: 결제 시스템에서 거부된 결제)
     - 단일 필드 의미적 규칙 위반 (예: 유효하지 않은 사업자 등록번호)
+    
+    한 번에 하나의 규칙 위반만 반환합니다. 첫 번째 위반 사항이 발견되면 즉시 오류를 반환합니다.
   properties:
     type:
       $ref: './schemas.yaml#/Type'
     title:
       $ref: './schemas.yaml#/Title'
-      example: "비즈니스 규칙 위반"
     status:
       $ref: './schemas.yaml#/Status'
-      example: 422
     detail:
       $ref: './schemas.yaml#/Detail'
+      description: 비즈니스 규칙 위반에 대한 설명
+    violationField:
+      type: string
       description: |
-        비즈니스 규칙 위반에 대한 일반적인 설명.
-        title보다 구체적이지만 errors 항목보다는 일반적인 수준의 정보를 제공합니다.
-    errors:
+        규칙 위반과 관련된 주요 필드
+        예: 'mainLanguage', 'capacity' 등
+      example: "mainLanguage"
+    message:
+      type: string
+      description: 규칙 위반에 대한 상세 설명
+      example: "대표 언어는 반드시 languages 목록에 포함되어야 합니다"
+    resourceType:
+      type: string
+      description: |
+        비즈니스 규칙 위반이 발생한 리소스 유형
+        예: 'user', 'study-group', 'solution' 등
+      example: "study-group"
+    relatedFields:
       type: array
-      description: 위반된 비즈니스 규칙에 대한 상세 정보 배열
+      description: |
+        규칙 위반과 관련된 추가 필드들
+        필드 간 관계 검증 시 유용
       items:
-        type: object
-        required:
-          - field
-          - message
-        properties:
-          field:
-            type: string
-            description: |
-              규칙 위반과 관련된 주요 필드.
-              특정 필드와 관련이 없는 경우 대표 필드나 오류 유형을 나타내는 문자열 사용.
-          message:
-            type: string
-            description: 규칙 위반에 대한 상세 설명
-          relatedFields:
-            type: array
-            description: |
-              규칙 위반과 관련된 추가 필드들 (선택적).
-              필드 간 관계 검증 시 유용하며, 다른 규칙 유형에서는 생략 가능.
-            items:
-              type: string
+        type: string
+      example: ["languages"]
   example:
-    # 필드 간 관계 규칙 위반 예시
-    fieldRelationship:
-      summary: 필드 간 관계 규칙 위반
-      value:
-        type: "about:blank"
-        title: "비즈니스 규칙 위반"
-        status: 422
-        detail: "필드 간 관계가 비즈니스 규칙을 위반했습니다"
-        errors:
-          - field: "규칙 위반한 주요 필드"
-            message: "규칙 위반에 대한 상세 설명"
-            relatedFields: [ "규칙 위반과 관련된 추가 필드1", "규칙 위반과 관련된 추가 필드2" ]
+    type: "about:blank"
+    title: "비즈니스 규칙 위반"
+    status: 422
+    detail: "필드 간 관계가 비즈니스 규칙을 위반했습니다"
+    violationField: "규칙 위반한 주요 필드"
+    message: "규칙 위반에 대한 상세 설명"
+    resourceType: "resource"
+    relatedFields: ["규칙 위반과 관련된 추가 필드1", "규칙 위반과 관련된 추가 필드2"]
