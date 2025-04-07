@@ -64,4 +64,6 @@ paths:
   /study-groups/{studyGroupId}/reopen:
     post:
       $ref: './study-group/feature/reopen.yaml#/Post'
-
+  /study-groups/{studyGroupId}/membership:
+    delete:
+      $ref: './study-group/feature/leave.yaml#/Delete'
