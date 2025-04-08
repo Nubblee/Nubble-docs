@@ -1,35 +1,32 @@
 Resource:
   type: object
   properties:
-    data:
+    type:
+      $ref: './type.yaml#/Type'
+    id:
+      $ref: './attribute.yaml#/NoticeId'
+    attributes:
       type: object
       properties:
-        type:
-          $ref: './type.yaml#/Type'
-        id:
-          $ref: './attribute.yaml#/NoticeId'
-        attributes:
-          type: object
-          properties:
-            authorId:
-              $ref: './attribute.yaml#/AuthorId'
-            title:
-              $ref: './attribute.yaml#/Title'
-            content:
-              $ref: './attribute.yaml#/Content'
-            isPinned:
-              $ref: './attribute.yaml#/IsPinned'
-            createdAt:
-              $ref: './attribute.yaml#/CreatedAt'
-            updatedAt:
-              $ref: './attribute.yaml#/UpdatedAt'
-        relationships:
-          type: object
-          properties:
-            author:
-              $ref: '../user/relationship.yaml#/User'
-        links:
-          type: object
-          properties:
-            self:
-              $ref: './link.yaml#/Self'
+        authorId:
+          $ref: './attribute.yaml#/AuthorId'
+        title:
+          $ref: './attribute.yaml#/Title'
+        content:
+          $ref: './attribute.yaml#/Content'
+        isPinned:
+          $ref: './attribute.yaml#/IsPinned'
+        createdAt:
+          $ref: './attribute.yaml#/CreatedAt'
+        updatedAt:
+          $ref: './attribute.yaml#/UpdatedAt'
+    relationships:
+      type: object
+      properties:
+        author:
+          $ref: '../user/relationship.yaml#/User'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'
