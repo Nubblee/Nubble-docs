@@ -74,3 +74,6 @@ paths:
   /study-groups/{studyGroupId}/notices:
     post:
       $ref: './study-notice/feature/create.yaml#/Post'
+  /study-groups/{studyGroupId}/notices/{noticeId}:
+      get:
+        $ref: './study-notice/feature/get.yaml#/Get'
