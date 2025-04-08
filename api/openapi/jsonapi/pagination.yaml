@@ -1,0 +1,24 @@
+PageNumber:
+  name: page[number]
+  in: query
+  required: false
+  description: |
+    요청할 페이지 번호 (1부터 시작)
+    JSON:API 표준에 따른 페이지네이션 파라미터
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+
+PageSize:
+  name: page[size]
+  in: query
+  required: false
+  description: |
+    페이지당 항목 수 (최대 50)
+    JSON:API 표준에 따른 페이지네이션 파라미터
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
