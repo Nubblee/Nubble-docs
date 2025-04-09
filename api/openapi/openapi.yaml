@@ -79,3 +79,5 @@ paths:
   /study-groups/{studyGroupId}/notices/{noticeId}:
       get:
         $ref: './study-notice/feature/get.yaml#/Get'
+      delete:
+        $ref: './study-notice/feature/delete.yaml#/Delete'
