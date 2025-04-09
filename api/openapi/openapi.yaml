@@ -79,5 +79,7 @@ paths:
   /study-groups/{studyGroupId}/notices/{noticeId}:
       get:
         $ref: './study-notice/feature/get.yaml#/Get'
+      patch:
+        $ref: './study-notice/feature/update.yaml#/Patch'
       delete:
         $ref: './study-notice/feature/delete.yaml#/Delete'
