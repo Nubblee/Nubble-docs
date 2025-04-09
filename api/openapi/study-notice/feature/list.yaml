@@ -104,7 +104,3 @@ Response:
       description: 포함된 관련 리소스 (include 파라미터에 지정된 경우)
       items:
         $ref: '../../user/resource.yaml#/PublicResource'
-  required:
-    - data
-    - links
-    - meta

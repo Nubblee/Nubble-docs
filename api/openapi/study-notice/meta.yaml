@@ -1,0 +1,4 @@
+IsPinned:
+  type: boolean
+  description: 공지사항 상단 고정 여부
+  example: false

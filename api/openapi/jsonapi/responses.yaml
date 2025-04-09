@@ -54,9 +54,9 @@ RelationshipResponse:
             $ref: '#/ResourceIdentifier'
         - type: 'null'
     meta:
-      $ref: '#/Meta'
+      $ref: './schemas.yaml#/Meta'
     links:
-      $ref: '#/Links'
+      $ref: './schemas.yaml#/Links'
   oneOf:
     - required: [ 'data' ]
     - required: [ 'meta' ]

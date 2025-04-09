@@ -14,12 +14,15 @@ Resource:
           $ref: './attribute.yaml#/Title'
         content:
           $ref: './attribute.yaml#/Content'
-        isPinned:
-          $ref: './attribute.yaml#/IsPinned'
         createdAt:
           $ref: './attribute.yaml#/CreatedAt'
         updatedAt:
           $ref: './attribute.yaml#/UpdatedAt'
+    meta:
+      type: object
+      properties:
+        isPinned:
+          $ref: './meta.yaml#/IsPinned'
     relationships:
       type: object
       properties:
