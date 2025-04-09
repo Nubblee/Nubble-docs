@@ -77,9 +77,13 @@ paths:
     get:
       $ref: './study-notice/feature/list.yaml#/Get'
   /study-groups/{studyGroupId}/notices/{noticeId}:
-      get:
-        $ref: './study-notice/feature/get.yaml#/Get'
-      patch:
-        $ref: './study-notice/feature/update.yaml#/Patch'
-      delete:
-        $ref: './study-notice/feature/delete.yaml#/Delete'
+    get:
+      $ref: './study-notice/feature/get.yaml#/Get'
+    patch:
+      $ref: './study-notice/feature/update.yaml#/Patch'
+    delete:
+      $ref: './study-notice/feature/delete.yaml#/Delete'
+
+  /study-groups/{studyGroupId}/notices/{noticeId}/pin:
+    post:
+      $ref: './study-notice/feature/pin.yaml#/Post'
