@@ -206,15 +206,12 @@ direction LR
 | title | String | 제목 |
 | content | String | 내용 |
 | createdBy | User | 작성자 |
-| isPinned | Boolean | 상단 고정 여부 |
 
 ### 주요 메서드 및 기능
 
 - `createNotice()`: 공지사항 작성
 - `updateNotice()`: 공지사항 내용 수정
 - `deleteNotice()`: 공지사항 삭제
-- `pinNotice()`: 공지사항 상단 고정 설정
-- `unpinNotice()`: 공지사항 고정 해제
 - `getStudyNotices()`: 스터디의 모든 공지사항 조회
 - `getPinnedNotices()`: 상단 고정된 공지사항 조회
 
@@ -223,15 +220,58 @@ direction LR
 - 공지사항 작성 권한은 기본적으로 스터디장에게만 있음
 - 공지사항 수정은 작성자 본인만 가능 (작성자의 권한 보장)
 - 공지사항 삭제는 작성자 본인과 스터디장이 가능 (스터디장은 관리 권한 보유)
-- 상단 고정은 최대 3개까지만 가능하며, 그 이상 고정하려면 기존 고정 공지를 해제해야 함
 - 종료된 스터디에서도 공지사항 작성, 수정, 삭제가 가능함 (소통 채널 유지)
 
-### 참고사항
 
-- 공지사항 조회 시 핀된 공지사항과 일반 공지사항을 구분하여 제공합니다:
-    - getStudyNotices(boolean includePinned)는 기본적으로 핀된 공지사항을 제외하고 조회합니다 (includePinned 기본값: false)
-    - getPinnedNotices()를 통해 핀된 공지사항만 별도로 조회할 수 있습니다
-    - UI에서는 보통 핀된 공지사항을 상단에 별도 영역으로 표시하고, 그 아래에 일반 공지사항 목록을 표시합니다
+## PinnedNotice (공지사항 고정)
+
+### 정의
+
+PinnedNotice(공지사항 고정)는 특정 스터디 그룹 내에서 공지사항을 상단에 고정하는 정보를 관리하는 독립적인 도메인입니다. 이 도메인은 공지사항과 스터디 그룹 사이의 관계를 나타냅니다
+
+### 도메인 구성요소
+
+```mermaid
+flowchart TB
+    PinnedNotice[공지사항 고정]
+    StudyGroup[스터디 그룹]
+    StudyNotice[스터디 공지사항]
+    User[유저]
+    
+    PinnedNotice -->|참조| StudyGroup
+    PinnedNotice -->|참조| StudyNotice
+    PinnedNotice -->|참조| User
+```
+
+### 주요 속성
+
+| 속성     | 타입        | 설명                           |
+|:-------|:----------|:-----------------------------|
+| id     | String    | 고정 정보의 고유 식별자                |
+| studyGroupId| String    | 스터디 그룹 ID                    |
+|noticeId| String    | 고정된 공지사항 ID                  |
+|pinnedAt| LocalDateTime| 고정 설정 시간                     |
+|pinnedBy|String| 고정 설정한 사용자(스터디장) ID          |
+|order|Integer| 고정 순서 (1부터 시작, 값이 작을수록 상단에 표시)|
+
+### 비즈니스 규칙
+
+1. **고정 개수 제한**
+    - 한 스터디 그룹 내에서 최대 3개의 공지사항만 고정할 수 있습니다.
+    - 이미 3개의 공지사항이 고정된 상태에서 새로운 공지사항을 고정하려면 기존 고정 중 하나를 먼저 해제해야 합니다.
+
+2. **순서 관리**
+    - 고정 순서는 1부터 시작하며, 값이 작을수록 더 상단에 표시됩니다.
+    - 특정 순서에 새 공지사항이 고정되면, 해당 순서 이상의 기존 고정 공지사항들은 자동으로 한 단계씩 아래로 밀립니다.
+    - 중간 순서의 공지사항이 고정 해제되면, 그보다 아래 순서의 공지사항들은 자동으로 한 단계씩 위로 당겨집니다.
+
+3. **권한 제한**
+    - 공지사항 고정 설정 및 해제는 스터디장만 가능합니다.
+    - 스터디원은 고정된 공지사항을 조회할 수는 있지만, 고정 관련 작업은 수행할 수 없습니다.
+
+4. **생명주기 의존성**
+    - 공지사항이 삭제되면 관련된 고정 정보도 함께 삭제됩니다(CASCADE).
+    - 스터디 그룹이 삭제되면 관련된 모든 고정 정보도 함께 삭제됩니다.
 
 ## Problem (코딩테스트 문제)
 
@@ -281,6 +321,72 @@ direction LR
 - 난이도나 알고리즘 분류 등의 정형화된 정보는 제공하지 않고, 대신 자유롭게 작성할 수 있는 memo 필드를 통해 관련 정보를 남길 수 있습니다.
 - 모든 문제는 등록 즉시 스터디원에게 공개됩니다.
 - 풀이가 등록된 문제는 데이터 일관성 유지를 위해 삭제가 불가능하며, 해당 문제의 URL도 수정할 수 없습니다. 이는 기존 풀이와 문제 간의 연결이 깨지는 것을 방지하기 위함입니다.
+
+### 도메인 간 시퀀스 다이어그램
+
+#### 공지사항 고정 프로세스
+
+```mermaid
+sequenceDiagram
+    actor Leader as 스터디장
+    participant PinnedService as 공지사항 고정 서비스
+    participant AuthService as 권한 검증 서비스
+    participant NoticeService as 공지사항 서비스
+    participant Repository as 고정 공지사항 저장소
+    
+    Leader->>+PinnedService: 1. 공지사항 고정 요청 (studyGroupId, noticeId)
+    
+    PinnedService->>+AuthService: 2. 스터디장 권한 확인
+    AuthService-->>-PinnedService: 권한 확인 결과
+    
+    PinnedService->>+NoticeService: 3. 공지사항 존재 확인
+    NoticeService-->>-PinnedService: 공지사항 정보
+    
+    PinnedService->>+Repository: 4. 마지막 순서 고정된 공지사항 조회
+    Repository-->>-PinnedService: 마지막 순서를 가져옴
+    
+    alt 고정 가능 (3개 미만)
+        PinnedService->>+PinnedService: 5.1 순서 계산 (마지막 순서 + 1)
+        
+        PinnedService->>+Repository: 5.2 새 고정 정보 저장
+        Repository-->>-PinnedService: 저장된 고정 정보
+        
+        PinnedService-->>-Leader: 5.3 고정 성공 및 정보 반환
+    else 고정 불가 (이미 3개 고정됨)
+        PinnedService-->>-Leader: 5.1 오류 반환 (최대 개수 초과)
+    end
+```
+
+### 공지항 고정 해지 프로세스
+
+```mermaid
+sequenceDiagram
+    actor Leader as 스터디장
+    participant PinnedService as 공지사항 고정 서비스
+    participant AuthService as 권한 검증 서비스
+    participant Repository as 고정 공지사항 저장소
+    
+    Leader->>+PinnedService: 1. 공지사항 고정 해제 요청 (pinnedNoticeId)
+    
+    PinnedService->>+AuthService: 2. 스터디장 권한 확인
+    AuthService-->>-PinnedService: 권한 확인 결과
+    
+    PinnedService->>+Repository: 3. 해제할 고정 공지사항 조회
+    Repository-->>-PinnedService: 고정 공지사항 정보
+    
+    PinnedService->>+Repository: 4. 고정 정보 삭제
+    Repository-->>-PinnedService: 삭제 완료
+    
+    PinnedService->>+Repository: 5. 해제된 순서(N) 이후 항목들 조회
+    Repository-->>-PinnedService: 영향 받는 항목 목록
+    
+    alt 재조정할 항목이 있는 경우
+        PinnedService->>+Repository: 6.1 영향 받는 항목들 순서 -1 처리
+        Repository-->>-PinnedService: 업데이트 결과
+    end
+    
+    PinnedService-->>-Leader: 7. 해제 완료 응답 (204 No Content)
+```
 
 ## 확장 고려사항
 
