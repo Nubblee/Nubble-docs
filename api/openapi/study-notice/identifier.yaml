@@ -1,0 +1,17 @@
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/NoticeId'
+
+Type:
+  type: string
+  enum: [study-notices]
+  default: study-notices
+
+NoticeId:
+  type: string
+  description: 공지사항 고유 식별자
+  example: "123"

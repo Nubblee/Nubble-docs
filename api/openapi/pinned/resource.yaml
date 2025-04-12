@@ -1,0 +1,28 @@
+Resource:
+  type: object
+  allOf:
+    - $ref: './identifier.yaml#/Identifier'
+  properties:
+    attributes:
+      type: object
+      properties:
+        noticeId:
+          $ref: './attribute.yaml#/NoticeId'
+        pinnedAt:
+          $ref: './attribute.yaml#/PinnedAt'
+        pinnedBy:
+          $ref: './attribute.yaml#/PinnedBy'
+        order:
+          $ref: './attribute.yaml#/Order'
+    relationships:
+      type: object
+      properties:
+        notice:
+          $ref: '../study-notice/relationship.yaml#/ToOne'
+        pinnedBy:
+          $ref: '../user/relationship.yaml#/User'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'

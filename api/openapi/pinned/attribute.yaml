@@ -1,0 +1,24 @@
+NoticeId:
+  type: string
+  description: 고정할/고정된 공지사항의 고유 식별자
+  example: "456"
+
+PinnedAt:
+  type: string
+  format: date-time
+  description: 공지사항 고정 설정 시간
+  example: "2025-05-01T14:30:00Z"
+
+PinnedBy:
+  type: string
+  description: 공지사항 고정 설정한 사용자(스터디장) ID
+  example: "123"
+
+Order:
+  type: integer
+  description: |
+    고정 순서 (1부터 시작, 값이 작을수록 상단에 표시)
+    지정하지 않으면 자동으로 가장 마지막 순서에 추가됩니다
+  minimum: 1
+  maximum: 3
+  example: 1

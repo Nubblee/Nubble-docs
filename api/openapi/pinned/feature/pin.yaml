@@ -1,0 +1,108 @@
+Put:
+  tags:
+    - Study Notice API
+  summary: 공지사항 고정
+  description: |
+    특정 공지사항을 스터디의 상단에 고정합니다.
+    
+    비즈니스 규칙:
+    - 스터디장만 공지사항을 고정할 수 있습니다
+    - 스터디당 최대 3개의 공지사항만 고정 가능합니다
+    - 이미 3개의 공지사항이 고정된 상태에서 새로 고정하려면
+      기존 고정된 공지사항 중 하나를 먼저 해제해야 합니다
+    - 이미 고정된 공지사항에 대한 고정 요청은 해당 고정 정보를 반환합니다 (200 응답)
+    - 가장 마지막 순서에 추가됩니다
+  operationId: pinNotice
+  parameters:
+    - name: studyGroupId
+      in: path
+      required: true
+      description: 공지사항이 속한 스터디 그룹의 고유 식별자
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '200':
+      description: |
+        공지사항 고정 성공
+        
+        공지사항이 성공적으로 고정되었습니다(처음 고정하는 경우와 이미 고정된 경우 모두).
+        응답에는 현재 고정 상태에 대한 상세 정보가 포함됩니다.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/Response'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
+    '403':
+      description: 권한 없음 (스터디장이 아닌 경우)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ForbiddenError'
+          example:
+            type: "about:blank"
+            title: "접근 권한 없음"
+            status: 403
+            detail: "스터디장만 공지사항을 고정할 수 있습니다"
+    '404':
+      description: 스터디 그룹 또는 공지사항을 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+    '409':
+      description: 상태 충돌 (이미 최대 개수의 공지사항이 고정됨)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ConflictError'
+          example:
+            type: "about:blank"
+            title: "리소스 충돌"
+            status: 409
+            detail: "최대 3개의 공지사항만 고정할 수 있습니다. 기존 고정된 공지사항을 해제한 후 다시 시도해주세요."
+            conflictField: "pinCount"
+            resourceType: "pinned-notice"
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../identifier.yaml#/Type'
+        attributes:
+          type: object
+          properties:
+            noticeId:
+              $ref: '../../study-notice/identifier.yaml#/NoticeId'
+          required:
+            - noticeId
+      required:
+        - type
+        - attributes
+  required:
+    - data
+
+Response:
+  type: object
+  properties:
+    data:
+      $ref: '../resource.yaml#/Resource'

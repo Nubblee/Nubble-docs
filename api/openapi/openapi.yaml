@@ -85,5 +85,5 @@ paths:
       $ref: './study-notice/feature/delete.yaml#/Delete'
 
   /study-groups/{studyGroupId}/notices/{noticeId}/pin:
-    post:
-      $ref: './study-notice/feature/pin.yaml#/Post'
+    put:
+      $ref: './pinned/feature/pin.yaml#/Put'

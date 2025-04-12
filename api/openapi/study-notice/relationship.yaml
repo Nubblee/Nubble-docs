@@ -1,0 +1,11 @@
+ToOne:
+  type: object
+  properties:
+    data:
+      allOf:
+        - $ref: '../study-notice/identifier.yaml#/Identifier'
+    links:
+      type: object
+      properties:
+        related:
+          $ref: './link.yaml#/Self'
