@@ -4,14 +4,14 @@ Identifier:
     type:
       $ref: '#/Type'
     id:
-      $ref: '#/PinnedNoticeId'
+      $ref: '#/NoticePinId'
 
 Type:
   type: string
-  enum: [pinned-notices]
-  default: pinned-notices
+  enum: [notice-pin]
+  default: notice-pin
 
-PinnedNoticeId:
+NoticePinId:
   type: string
   description: 고정된 공지사항의 고유 식별자
   example: "789"
