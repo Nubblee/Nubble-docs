@@ -7,7 +7,7 @@ Get:
     
     - 기본적으로 최신순(createdAt 내림차순)으로 정렬됩니다
     - 페이지네이션 방식으로 결과를 분할하여 제공합니다
-    - 고정된 공지사항(isPinned=true)와 일반 공지사항을 구분하여 조회할 수 있습니다
+    - 고정된 공지사항만 조회하려면 `/study-groups/{studyGroupId}/notice-pins` 엔드포인트를 사용하세요
   operationId: listStudyNotices
   security: []
   parameters:
@@ -17,16 +17,6 @@ Get:
       description: 조회할 스터디 그룹의 고유 식별자
       schema:
         type: string
-    - name: filter[isPinned]
-      in: query
-      required: false
-      description: |
-        고정 공지사항 필터링 옵션
-        - true: 고정된 공지사항만 조회
-        - false: 고정되지 않은 공지사항만 조회
-        - 미지정: 모든 공지사항 조회
-      schema:
-        type: boolean
     - $ref: '../../jsonapi/pagination.yaml#/PageNumber'
     - $ref: '../../jsonapi/pagination.yaml#/PageSize'
     - name: sort
