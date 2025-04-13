@@ -21,8 +21,3 @@ Resource:
           $ref: '../study-notice/relationship.yaml#/ToOne'
         pinnedBy:
           $ref: '../user/relationship.yaml#/User'
-    links:
-      type: object
-      properties:
-        self:
-          $ref: './link.yaml#/Self'

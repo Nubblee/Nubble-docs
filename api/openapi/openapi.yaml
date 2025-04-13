@@ -90,3 +90,6 @@ paths:
     delete:
       $ref: './pinned/feature/unpin.yaml#/Delete'
 
+  /study-groups/{studyGroupId}/notice-pins:
+    get:
+      $ref: './pinned/feature/list.yaml#/Get'

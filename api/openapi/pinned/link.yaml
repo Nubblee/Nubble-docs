@@ -1,5 +1,5 @@
-Self:
+MultiSelf:
   type: string
   format: uri
-  description: 고정된 공지사항 리소스에 직접 접근할 수 있는 URI
-  example: "/api/v1/study-groups/123/pinned-notices/456"
+  description: 현재 리소스에 접근할 수 있는 URI
+  example: "/api/v1/study-groups/123/notice-pins"
