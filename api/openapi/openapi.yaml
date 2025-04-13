@@ -87,3 +87,6 @@ paths:
   /study-groups/{studyGroupId}/notices/{noticeId}/pin:
     put:
       $ref: './pinned/feature/pin.yaml#/Put'
+    delete:
+      $ref: './pinned/feature/unpin.yaml#/Delete'
+
