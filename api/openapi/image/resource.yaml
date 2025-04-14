@@ -1,0 +1,33 @@
+Resource:
+  type: object
+  properties:
+    data:
+      allOf:
+        - $ref: './identifier.yaml#/Identifier'
+        - type: object
+          properties:
+            attributes:
+              $ref: './attributes.yaml#/Attributes'
+            relationships:
+              type: object
+              properties:
+                resource:
+                  type: object
+                  description: 이 이미지와 연결된 리소스 (영구 이미지인 경우에만 존재)
+                  nullable: true
+                  properties:
+                    data:
+                      type: object
+                      nullable: true
+                      allOf:
+                        - $ref: '../study-notice/identifier.yaml#/Identifier'
+                uploadedBy:
+                  type: object
+                  properties:
+                    data:
+                      $ref: '../user/identifier.yaml#/Identifier'
+            links:
+              type: object
+              properties:
+                self:
+                  $ref: './link.yaml#/SingleSelf'

@@ -27,6 +27,8 @@ tags:
     description: 스터디 그룹 관련 API
   - name: Study Notice API
     description: 스터디 공지사항 관련 API
+  - name: Image API
+    description: 이미지 업로드 및 관리 관련 API
 
 paths:
   # 사용자 API
@@ -83,13 +85,16 @@ paths:
       $ref: './study-notice/feature/update.yaml#/Patch'
     delete:
       $ref: './study-notice/feature/delete.yaml#/Delete'
-
   /study-groups/{studyGroupId}/notices/{noticeId}/pin:
     put:
       $ref: './notice-pin/feature/pin.yaml#/Put'
     delete:
       $ref: './notice-pin/feature/unpin.yaml#/Delete'
-
   /study-groups/{studyGroupId}/notice-pins:
     get:
       $ref: './notice-pin/feature/list.yaml#/Get'
+
+  # 이미지 API
+  /images:
+    post:
+      $ref: './image/feature/upload.yaml#/Post'

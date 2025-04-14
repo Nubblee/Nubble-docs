@@ -1,0 +1,5 @@
+SingleSelf:
+  type: string
+  format: uri
+  description: 이미지 메타데이터에 접근할 수 있는 URI
+  example: "/api/v1/images/image123/info"

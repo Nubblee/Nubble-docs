@@ -1,0 +1,17 @@
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    UserId:
+      $ref: '#/UserId'
+
+Type:
+  type: string
+  enum: [users]
+  default: users
+
+UserId:
+  type: string
+  description: 사용자 고유 식별자
+  example: "123"

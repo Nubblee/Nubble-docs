@@ -1,0 +1,17 @@
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/ImageId'
+
+Type:
+  type: string
+  enum: [ images ]
+  default: images
+
+ImageId:
+  type: string
+  description: 이미지 고유 식별자
+  example: "image123"
