@@ -104,3 +104,5 @@ paths:
       $ref: './problem/feature/register.yaml#/Post'
     patch:
       $ref: './problem/feature/update.yaml#/Patch'
+    delete:
+      $ref: './problem/feature/delete.yaml#/Delete'
