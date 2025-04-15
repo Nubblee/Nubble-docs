@@ -34,7 +34,7 @@ Patch:
       content:
         application/vnd.api+json:
           schema:
-            $ref: '../resource.yaml#/Resource'
+            $ref: '#/Response'
     '400':
       description: 유효하지 않은 입력값 (형식 오류, 필수 필드 누락 등)
       content:
@@ -134,3 +134,9 @@ Request:
   required:
     - data
   additionalProperties: false
+
+Response:
+  type: object
+  properties:
+    data:
+      $ref: '../resource.yaml#/Resource'

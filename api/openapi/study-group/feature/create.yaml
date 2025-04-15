@@ -29,7 +29,7 @@ Post:
       content:
         application/vnd.api+json:
           schema:
-            $ref: '../resource.yaml#/Resource'
+            $ref: '#/Response'
     '400':
       description: 유효하지 않은 입력값
       content:
@@ -97,3 +97,9 @@ Request:
   required:
     - data
   additionalProperties: false
+
+Response:
+  type: object
+  properties:
+    data:
+      $ref: '../resource.yaml#/Resource'
