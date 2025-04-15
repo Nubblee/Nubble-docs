@@ -1,12 +1,28 @@
 PaginationMeta:
   type: object
-  description: 페이지네이션 메타데이터
+  description: 확장된 페이지네이션 메타데이터
   properties:
     totalItems:
       type: integer
       description: 전체 항목 수
-      example: 97
+      example: 42
     totalPages:
       type: integer
       description: 전체 페이지 수
-      example: 5
+      example: 3
+    currentPage:
+      type: integer
+      description: 현재 페이지 번호
+      example: 1
+    itemsPerPage:
+      type: integer
+      description: 페이지당 항목 수
+      example: 20
+    isFirstPage:
+      type: boolean
+      description: 현재 페이지가 첫 페이지인지 여부
+      example: true
+    isLastPage:
+      type: boolean
+      description: 현재 페이지가 마지막 페이지인지 여부
+      example: false
