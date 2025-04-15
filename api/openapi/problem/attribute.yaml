@@ -1,0 +1,48 @@
+Title:
+  type: string
+  description: 문제 제목
+  example: "Two Sum"
+  minLength: 1
+  maxLength: 100
+
+Url:
+  type: string
+  format: uri
+  description: 문제 링크 (외부 플랫폼)
+  example: "https://leetcode.com/problems/two-sum/"
+
+Description:
+  type: string
+  description: 문제 설명
+  example: "배열과 타겟 숫자가 주어졌을 때, 합이 타겟이 되는 두 원소의 인덱스를 리턴하는 문제입니다."
+  maxLength: 1000
+
+Memo:
+  type: string
+  description: 추가 메모 (난이도, 분류 등)
+  example: "난이도: 쉬움, 분류: 해시맵, 배열"
+  maxLength: 500
+
+Status:
+  type: string
+  enum: [REGISTERED]
+  description: 문제 상태
+  default: REGISTERED
+  example: "REGISTERED"
+
+CreatorId:
+  type: string
+  description: 문제 등록자 ID
+  example: "123"
+
+CreatedAt:
+  type: string
+  format: date-time
+  description: 등록 일시
+  example: "2025-04-15T14:30:00Z"
+
+UpdatedAt:
+  type: string
+  format: date-time
+  description: 수정 일시
+  example: "2025-04-15T15:45:00Z"

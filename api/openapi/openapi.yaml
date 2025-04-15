@@ -29,6 +29,8 @@ tags:
     description: 스터디 공지사항 관련 API
   - name: Image API
     description: 이미지 업로드 및 관리 관련 API
+  - name: Problem API
+    description: 코딩 테스트 문제 관련 API
 
 paths:
   # 사용자 API
@@ -95,3 +97,8 @@ paths:
   /images:
     post:
       $ref: './image/feature/upload.yaml#/Post'
+
+  # 코딩테스트 문제 API
+  /study-groups/{studyGroupId}/problems:
+    post:
+      $ref: './problem/feature/register.yaml#/Post'

@@ -1,0 +1,15 @@
+ToOne:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: './type.yaml#/Type'
+        id:
+          $ref: './attribute.yaml#/StudyGroupId'
+    links:
+      type: object
+      properties:
+        related:
+          $ref: './link.yaml#/Self'
