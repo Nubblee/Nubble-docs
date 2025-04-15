@@ -1,20 +1,26 @@
-Post:
+Patch:
   tags:
     - Problem API
-  summary: 코딩테스트 문제 등록
+  summary: 코딩테스트 문제 수정
   description: |
-    스터디에 새로운 코딩테스트 문제를 등록합니다.
+    스터디에 등록된 코딩테스트 문제의 정보를 수정합니다.
     
-    - 스터디장만 문제를 등록할 수 있습니다
-    - 종료된(ENDED) 스터디에는 문제를 등록할 수 없습니다
-    - 등록된 문제는 스터디의 모든 멤버에게 공개됩니다
-    - 문제는 등록과 동시에 '등록됨(REGISTERED)' 상태가 됩니다
-  operationId: registerProblem
+    - 스터디장만 문제를 수정할 수 있습니다
+    - 종료된(ENDED) 스터디의 문제는 수정할 수 없습니다
+    - JSON:API 표준에 따라 변경하려는 필드만 요청에 포함해야 합니다
+    - 풀이가 등록된 문제의 정보도 수정 가능합니다
+  operationId: updateProblem
   parameters:
     - name: studyGroupId
       in: path
       required: true
-      description: 문제를 등록할 스터디 그룹의 고유 식별자
+      description: 문제가 속한 스터디 그룹의 고유 식별자
+      schema:
+        type: string
+    - name: problemId
+      in: path
+      required: true
+      description: 수정할 문제의 고유 식별자
       schema:
         type: string
   requestBody:
@@ -24,15 +30,8 @@ Post:
         schema:
           $ref: '#/Request'
   responses:
-    '201':
-      description: 문제 등록 성공
-      headers:
-        Location:
-          description: 등록된 문제 리소스의 URI
-          schema:
-            type: string
-            format: uri
-          example: "/study-groups/123/problems/456"
+    '200':
+      description: 문제 수정 성공
       content:
         application/vnd.api+json:
           schema:
@@ -50,7 +49,7 @@ Post:
           schema:
             $ref: '../../error/types.yaml#/UnauthenticatedError'
     '403':
-      description: 권한 없음 (스터디장이 아닌 경우 또는 종료된 스터디인 경우)
+      description: 권한 없음 (스터디장이 아니거나 종료된 스터디인 경우)
       content:
         application/problem+json:
           schema:
@@ -61,10 +60,10 @@ Post:
                   detail:
                     type: string
                     examples:
-                      unauthorized: "스터디장만 문제를 등록할 수 있습니다"
-                      ended: "종료된 스터디에는 문제를 등록할 수 없습니다"
+                      unauthorized: "스터디장만 문제를 수정할 수 있습니다"
+                      ended: "종료된 스터디의 문제는 수정할 수 없습니다"
     '404':
-      description: 스터디 그룹을 찾을 수 없음
+      description: 스터디 그룹 또는 문제를 찾을 수 없음
       content:
         application/problem+json:
           schema:
@@ -78,8 +77,13 @@ Request:
       properties:
         type:
           $ref: '../identifier.yaml#/Type'
+        id:
+          $ref: '../identifier.yaml#/ProblemId'
         attributes:
           type: object
+          description: |
+            업데이트할 문제 속성
+            변경하려는 필드만 포함하세요. 변경하지 않을 필드는 생략하세요.
           properties:
             title:
               $ref: '../attribute.yaml#/Title'
@@ -89,12 +93,10 @@ Request:
               $ref: '../attribute.yaml#/Description'
             memo:
               $ref: '../attribute.yaml#/Memo'
-          required:
-            - title
-            - url
           additionalProperties: false
       required:
         - type
+        - id
         - attributes
       additionalProperties: false
   required:

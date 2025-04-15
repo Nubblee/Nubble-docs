@@ -102,3 +102,5 @@ paths:
   /study-groups/{studyGroupId}/problems:
     post:
       $ref: './problem/feature/register.yaml#/Post'
+    patch:
+      $ref: './problem/feature/update.yaml#/Patch'
