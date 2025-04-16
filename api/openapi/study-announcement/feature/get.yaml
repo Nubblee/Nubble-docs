@@ -1,0 +1,55 @@
+Get:
+  tags:
+    - Study Announcement API
+  summary: 스터디 모집 공고 상세 조회
+  description: |
+    특정 스터디 모집 공고의 상세 정보를 조회합니다.
+    
+    - 공고 조회 시마다 viewCount가 증가합니다 (동일 사용자의 단시간 내 반복 조회 제외)
+  operationId: getStudyAnnouncement
+  security: []
+  parameters:
+    - name: studyGroupId
+      in: path
+      required: true
+      description: 공고가 속한 스터디 그룹의 고유 식별자
+      schema:
+        type: string
+    - name: announcementId
+      in: path
+      required: true
+      description: 조회할 공고의 고유 식별자
+      schema:
+        type: string
+    - name: include
+      in: query
+      required: false
+      description: 포함할 관련 리소스 (쉼표로 구분)
+      schema:
+        type: string
+        enum: [studyGroup]
+  responses:
+    '200':
+      description: 스터디 모집 공고 조회 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/Response'
+    '404':
+      description: 스터디 그룹 또는 공고를 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+
+Response:
+  type: object
+  properties:
+    data:
+      $ref: '../resource.yaml#/Resource'
+    included:
+      type: array
+      description: 포함된 관련 리소스 (include 파라미터에 지정된 경우)
+      items:
+        oneOf:
+          - $ref: '../../study-group/resource.yaml#/Resource'

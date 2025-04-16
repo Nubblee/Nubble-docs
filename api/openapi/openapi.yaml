@@ -118,6 +118,8 @@ paths:
     get:
       $ref: './study-announcement/feature/list.yaml#/Get'
   /study-groups/{studyGroupId}/announcements/{announcementId}:
+    get:
+      $ref: './study-announcement/feature/get.yaml#/Get'
     patch:
       $ref: './study-announcement/feature/update.yaml#/Patch'
     delete:
