@@ -1,0 +1,131 @@
+Patch:
+  tags:
+    - Study Announcement API
+  summary: 스터디 모집 공고 수정
+  description: |
+    스터디 모집 공고의 정보를 수정합니다.
+    
+    - 스터디장만 공고를 수정할 수 있습니다
+    - 공고는 '모집중' 상태일 때만 수정 가능합니다
+    - 모집 인원은 최소 1명 이상이어야 합니다
+    - 모집 마감 일시는 시작 일시보다 이후여야 합니다
+    - 모집 인원을 줄일 경우, 현재 승인된 지원자 수보다 적게 설정할 수 없습니다
+  operationId: updateStudyAnnouncement
+  parameters:
+    - name: studyGroupId
+      in: path
+      required: true
+      description: 공고가 속한 스터디 그룹의 고유 식별자
+      schema:
+        type: string
+    - name: announcementId
+      in: path
+      required: true
+      description: 수정할 공고의 고유 식별자
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '200':
+      description: 스터디 모집 공고 수정 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/Response'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
+    '403':
+      description: 권한 없음 (스터디장이 아닌 경우)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ForbiddenError'
+    '404':
+      description: 스터디 그룹 또는 공고를 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+    '409':
+      description: 모집 완료 상태의 공고는 수정할 수 없음
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: '../../error/types.yaml#/ConflictError'
+              - type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "모집 완료된 공고는 수정할 수 없습니다"
+                  conflictField:
+                    type: string
+                    example: "status"
+                  resourceType:
+                    type: string
+                    example: "study-announcement"
+    '422':
+      description: 비즈니스 규칙 위반 (모집 인원을 승인된 지원자 수보다 적게 설정 등)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnprocessableEntityError'
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../identifier.yaml#/Type'
+        id:
+          $ref: '../identifier.yaml#/AnnouncementId'
+        attributes:
+          type: object
+          description: |
+            업데이트할 공고 속성
+            변경하려는 필드만 포함하세요. 변경하지 않을 필드는 생략하세요.
+          properties:
+            title:
+              $ref: '../attribute.yaml#/Title'
+            description:
+              $ref: '../attribute.yaml#/Description'
+            recruitCapacity:
+              $ref: '../attribute.yaml#/RecruitCapacity'
+            startDateTime:
+              $ref: '../attribute.yaml#/StartDateTime'
+            endDateTime:
+              $ref: '../attribute.yaml#/EndDateTime'
+            applicationFormId:
+              $ref: '../attribute.yaml#/ApplicationFormId'
+          additionalProperties: false
+      required:
+        - type
+        - id
+        - attributes
+      additionalProperties: false
+  required:
+    - data
+  additionalProperties: false
+
+Response:
+  type: object
+  properties:
+    data:
+      $ref: '../resource.yaml#/Resource'

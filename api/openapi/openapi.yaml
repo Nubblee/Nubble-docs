@@ -115,3 +115,6 @@ paths:
   /study-groups/{studyGroupId}/announcements:
     post:
       $ref: './study-announcement/feature/create.yaml#/Post'
+  /study-groups/{studyGroupId}/announcements/{announcementId}:
+    patch:
+      $ref: './study-announcement/feature/update.yaml#/Patch'
