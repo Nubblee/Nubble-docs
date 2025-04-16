@@ -31,6 +31,8 @@ tags:
     description: 이미지 업로드 및 관리 관련 API
   - name: Problem API
     description: 코딩 테스트 문제 관련 API
+  - name: Study Announcement API
+    description: 스터디 모집 공고 관련 API
 
 paths:
   # 사용자 API
@@ -108,3 +110,8 @@ paths:
       $ref: './problem/feature/update.yaml#/Patch'
     delete:
       $ref: './problem/feature/delete.yaml#/Delete'
+
+  # 스터디 모집 공고 API
+  /study-groups/{studyGroupId}/announcements:
+    post:
+      $ref: './study-announcement/feature/create.yaml#/Post'

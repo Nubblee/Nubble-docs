@@ -1,0 +1,9 @@
+Type:
+  type: string
+  enum: [study-announcements]
+  default: study-announcements
+
+AnnouncementId:
+  type: string
+  description: 스터디 공고 고유 식별자
+  example: "123"

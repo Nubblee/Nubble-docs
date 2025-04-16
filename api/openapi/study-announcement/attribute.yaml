@@ -1,0 +1,99 @@
+StudyGroupId:
+  type: string
+  description: 스터디 그룹 고유 식별자
+  example: "456"
+
+ApplicationFormId:
+  type: string
+  description: 신청서 양식 고유 식별자
+  example: "789"
+
+Title:
+  type: string
+  description: 공고 제목
+  example: "알고리즘 스터디 모집합니다"
+  minLength: 1
+  maxLength: 100
+
+Description:
+  type: string
+  description: 상세 설명
+  example: "프로그래머스 고득점 Kit 문제를 함께 풀어볼 멤버를 모집합니다. 주 2회 온라인 모임으로 진행됩니다."
+  maxLength: 2000
+
+RecruitCapacity:
+  type: integer
+  description: 모집 인원
+  example: 5
+  minimum: 1
+  maximum: 30
+
+StartDateTime:
+  type: string
+  format: date-time
+  description: 모집 시작 일시
+  example: "2025-05-01T00:00:00Z"
+
+EndDateTime:
+  type: string
+  format: date-time
+  description: 모집 마감 일시
+  example: "2025-05-15T23:59:59Z"
+
+ClosedAt:
+  type: string
+  format: date-time
+  description: |
+    실제 마감 처리된 일시 (자동 마감 또는 수동 마감 시점)
+    - 모집중 상태인 경우 null
+    - 모집완료 상태인 경우 마감 처리된 일시
+  example: "2025-05-10T15:30:00Z"
+  nullable: true
+
+ClosedReason:
+  type: string
+  enum: [MANUAL, AUTO_CAPACITY_REACHED, AUTO_DEADLINE_REACHED]
+  description: |
+    공고 마감 이유
+    - MANUAL: 스터디장의 수동 마감
+    - AUTO_CAPACITY_REACHED: 모집 인원 도달로 인한 자동 마감
+    - AUTO_DEADLINE_REACHED: 모집 기한 도달로 인한 자동 마감
+    - 모집중 상태인 경우 null
+  example: "AUTO_CAPACITY_REACHED"
+  nullable: true
+
+Status:
+  type: string
+  enum: [RECRUITING, CLOSED]
+  description: 공고 상태 (모집중/모집완료)
+  example: "RECRUITING"
+
+CreatedAt:
+  type: string
+  format: date-time
+  description: 작성일시
+  example: "2025-04-20T14:30:00Z"
+
+UpdatedAt:
+  type: string
+  format: date-time
+  description: 마지막 수정 시간
+  example: "2025-04-22T10:15:00Z"
+
+TotalApplicantCount:
+  type: integer
+  description: 총 지원자 수 (승인/거부/대기 포함)
+  example: 12
+  minimum: 0
+
+ApprovedApplicantCount:
+  type: integer
+  description: 승인된 지원자 수
+  example: 3
+  minimum: 0
+
+ViewCount:
+  type: integer
+  description: 공고 조회수
+  example: 185
+  minimum: 0

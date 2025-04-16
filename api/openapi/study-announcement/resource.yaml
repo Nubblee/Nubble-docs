@@ -1,0 +1,48 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/AnnouncementId'
+    attributes:
+      type: object
+      properties:
+        title:
+          $ref: './attribute.yaml#/Title'
+        description:
+          $ref: './attribute.yaml#/Description'
+        recruitCapacity:
+          $ref: './attribute.yaml#/RecruitCapacity'
+        startDateTime:
+          $ref: './attribute.yaml#/StartDateTime'
+        endDateTime:
+          $ref: './attribute.yaml#/EndDateTime'
+        closedAt:
+          $ref: './attribute.yaml#/ClosedAt'
+        closedReason:
+          $ref: './attribute.yaml#/ClosedReason'
+        status:
+          $ref: './attribute.yaml#/Status'
+        createdAt:
+          $ref: './attribute.yaml#/CreatedAt'
+        updatedAt:
+          $ref: './attribute.yaml#/UpdatedAt'
+        totalApplicantCount:
+          $ref: './attribute.yaml#/TotalApplicantCount'
+        approvedApplicantCount:
+          $ref: './attribute.yaml#/ApprovedApplicantCount'
+        viewCount:
+          $ref: './attribute.yaml#/ViewCount'
+    relationships:
+      type: object
+      properties:
+        studyGroup:
+          $ref: '../study-group/relationship.yaml#/ToOne'
+        applicationForm:
+          $ref: '../application-form/relationship.yaml#/ToOne'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'
