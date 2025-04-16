@@ -118,6 +118,8 @@ paths:
   /study-groups/{studyGroupId}/announcements/{announcementId}:
     patch:
       $ref: './study-announcement/feature/update.yaml#/Patch'
+    delete:
+      $ref: './study-announcement/feature/delete.yaml#/Delete'
   /study-groups/{studyGroupId}/announcements/{announcementId}/close:
     post:
       $ref: './study-announcement/feature/close.yaml#/Post'
