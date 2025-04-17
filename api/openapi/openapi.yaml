@@ -46,7 +46,7 @@ paths:
   /users/{userId}:
     patch:
       $ref: './user/feature/update.yaml#/Patch'
-  /users/me:
+  /user:
     get:
       $ref: './user/feature/get-current.yaml#/Get'
 
@@ -141,7 +141,7 @@ paths:
       $ref: './study-application/feature/update.yaml#/Patch'
     delete:
       $ref: './study-application/feature/cancel.yaml#/Delete'
-  /my/applications:
+  /user/applications:
     get:
       $ref: './study-application/feature/list-my.yaml#/Get'
   /announcements/{announcementId}/applications:
