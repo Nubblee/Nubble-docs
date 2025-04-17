@@ -34,7 +34,7 @@ tags:
   - name: Study Announcement API
     description: 스터디 모집 공고 관련 API
   - name: Study Application API
-    description: 스터디 모집 신청서 관련 API
+    description: 스터디 신청 및 지원서 관리 관련 API
 
 paths:
   # 사용자 API
@@ -141,3 +141,6 @@ paths:
       $ref: './study-application/feature/update.yaml#/Patch'
     delete:
       $ref: './study-application/feature/cancel.yaml#/Delete'
+  /my/applications:
+    get:
+      $ref: './study-application/feature/list-my.yaml#/Get'
