@@ -150,3 +150,6 @@ paths:
   /applications/{applicationId}/start-review:
     post:
       $ref: './study-application/feature/start-review.yaml#/Post'
+  /applications/{applicationId}/approve:
+    post:
+      $ref: './study-application/feature/approve.yaml#/Post'
