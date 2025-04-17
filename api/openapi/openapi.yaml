@@ -134,3 +134,6 @@ paths:
   /applications:
     post:
       $ref: './study-application/feature/submit.yaml#/Post'
+  /applications/{applicationId}:
+    patch:
+      $ref: './study-application/feature/update.yaml#/Patch'

@@ -1,0 +1,107 @@
+Patch:
+  tags:
+    - Study Application API
+  summary: 스터디 신청서 수정
+  description: |
+    제출된 스터디 신청서의 내용을 수정합니다.
+    
+    - 신청서 작성자(지원자)만 수정할 수 있습니다
+    - 신청서 상태가 'SUBMITTED' 일 때만 수정 가능합니다
+    - 검토 중인 신청서(REVIEWING)이거나 이미 결정된 신청서(APPROVED/REJECTED)는 수정할 수 없습니다
+    - 취소된 신청서(CANCELED)는 수정할 수 없습니다
+  operationId: updateApplication
+  parameters:
+    - name: applicationId
+      in: path
+      required: true
+      description: 수정할 신청서의 고유 식별자
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/vnd.api+json:
+        schema:
+          $ref: '#/Request'
+  responses:
+    '200':
+      description: 신청서 수정 성공
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/Response'
+    '400':
+      description: 유효하지 않은 입력값
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ValidationError'
+    '401':
+      description: 인증되지 않은 요청
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/UnauthenticatedError'
+    '403':
+      description: 권한 없음 (신청서 작성자가 아닌 경우)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/ForbiddenError'
+    '404':
+      description: 신청서를 찾을 수 없음
+      content:
+        application/problem+json:
+          schema:
+            $ref: '../../error/types.yaml#/NotFoundError'
+    '409':
+      description: 신청서가 이미 검토 중이거나 결정된 상태
+      content:
+        application/problem+json:
+          schema:
+            allOf:
+              - $ref: '../../error/types.yaml#/ConflictError'
+              - type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "이미 검토 중이거나 결정된 신청서는 수정할 수 없습니다"
+                  conflictField:
+                    type: string
+                    example: "status"
+                  resourceType:
+                    type: string
+                    example: "study-application"
+
+Request:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          $ref: '../identifier.yaml#/Type'
+        id:
+          $ref: '../identifier.yaml#/ApplicationId'
+        attributes:
+          type: object
+          properties:
+            content:
+              $ref: '../attribute.yaml#/Content'
+          required:
+            - content
+          additionalProperties: false
+      required:
+        - type
+        - id
+        - attributes
+      additionalProperties: false
+  required:
+    - data
+  additionalProperties: false
+
+Response:
+  type: object
+  properties:
+    data:
+      $ref: '../resource.yaml#/Resource'
