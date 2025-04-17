@@ -1,0 +1,65 @@
+AnnouncementId:
+  type: string
+  description: 연결된 스터디 공고 ID
+  example: "456"
+
+ApplicantId:
+  type: string
+  description: 지원자 ID
+  example: "789"
+
+Content:
+  type: string
+  description: |
+    지원자가 작성한 신청서 내용 (공고의 applicationFormContent에 대한 응답)
+    각 줄은 질문에 대한 답변을 나타냅니다.
+  example: |
+    알고리즘 학습 경험: 프로그래머스 Level 2까지 풀어본 경험이 있습니다.
+    지원 동기: 혼자 공부하는 것보다 함께 문제를 풀며 성장하고 싶습니다.
+    사용 가능한 프로그래밍 언어: Java, Python
+    코딩테스트 풀이 경험: 프로그래머스 약 50문제, 백준 30문제
+    참여 가능 시간: 평일 저녁 7시 이후, 주말 오전
+    주당 투자 가능 시간: 10시간 정도
+  maxLength: 10000
+
+Status:
+  type: string
+  enum: [SUBMITTED, REVIEWING, APPROVED, REJECTED, CANCELED]
+  description: |
+    신청서 상태
+    - SUBMITTED: 제출됨 (초기 상태)
+    - REVIEWING: 검토중 (스터디장이 검토 시작함)
+    - APPROVED: 승인됨 (스터디원으로 승인됨)
+    - REJECTED: 거부됨 (스터디원 승인 거부)
+    - CANCELED: 취소됨 (지원자가 취소함)
+  example: "SUBMITTED"
+
+RejectionReason:
+  type: string
+  description: |
+    거부 사유 (거부된 경우에만 사용)
+    신청이 거부된 경우 스터디장이 작성하는 거부 이유
+  example: "현재 Java 개발자를 우선적으로 모집하고 있습니다."
+  nullable: true
+  maxLength: 1000
+
+SubmittedAt:
+  type: string
+  format: date-time
+  description: 제출 일시
+  example: "2025-05-05T14:30:00Z"
+
+UpdatedAt:
+  type: string
+  format: date-time
+  description: 수정 일시
+  example: "2025-05-05T15:45:00Z"
+
+ReviewedAt:
+  type: string
+  format: date-time
+  description: |
+    검토 완료 일시 (승인 또는 거부된 경우)
+    신청이 승인되거나 거부된 시간
+  example: "2025-05-06T10:15:00Z"
+  nullable: true

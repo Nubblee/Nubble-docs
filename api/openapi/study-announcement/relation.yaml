@@ -1,0 +1,20 @@
+ToOne:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [ study-announcements ]
+          default: study-announcements
+        id:
+          $ref: '../study-announcement/identifier.yaml#/AnnouncementId'
+    links:
+      type: object
+      properties:
+        related:
+          type: string
+          format: uri
+          description: 연결된 스터디 공고 리소스에 접근할 수 있는 URI
+          example: "/api/v1/announcements/456"

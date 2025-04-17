@@ -1,0 +1,36 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/ApplicationId'
+    attributes:
+      type: object
+      properties:
+        content:
+          $ref: './attribute.yaml#/Content'
+        status:
+          $ref: './attribute.yaml#/Status'
+        rejectionReason:
+          $ref: './attribute.yaml#/RejectionReason'
+        submittedAt:
+          $ref: './attribute.yaml#/SubmittedAt'
+        updatedAt:
+          $ref: './attribute.yaml#/UpdatedAt'
+        reviewedAt:
+          $ref: './attribute.yaml#/ReviewedAt'
+    relationships:
+      type: object
+      properties:
+        announcement:
+          $ref: '../study-announcement/relation.yaml#/ToOne'
+        applicant:
+          $ref: '../user/relationship.yaml#/User'
+        reviewer:
+          $ref: '../user/relationship.yaml#/User'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'

@@ -1,0 +1,5 @@
+Self:
+  type: string
+  format: uri
+  description: 신청서 리소스에 직접 접근할 수 있는 URI
+  example: "/api/v1/applications/123"

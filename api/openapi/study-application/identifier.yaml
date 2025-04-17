@@ -1,0 +1,17 @@
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/ApplicationId'
+
+Type:
+  type: string
+  enum: [study-applications]
+  default: study-applications
+
+ApplicationId:
+  type: string
+  description: 스터디 신청서 고유 식별자
+  example: "123"
