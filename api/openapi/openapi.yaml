@@ -153,3 +153,6 @@ paths:
   /applications/{applicationId}/approve:
     post:
       $ref: './study-application/feature/approve.yaml#/Post'
+  /applications/{applicationId}/reject:
+    post:
+      $ref: './study-application/feature/reject.yaml#/Post'
