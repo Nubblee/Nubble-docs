@@ -147,3 +147,6 @@ paths:
   /announcements/{announcementId}/applications:
     get:
       $ref: './study-application/feature/list-announcement.yaml#/Get'
+  /applications/{applicationId}/start-review:
+    post:
+      $ref: './study-application/feature/start-review.yaml#/Post'
