@@ -144,3 +144,6 @@ paths:
   /my/applications:
     get:
       $ref: './study-application/feature/list-my.yaml#/Get'
+  /announcements/{announcementId}/applications:
+    get:
+      $ref: './study-application/feature/list-announcement.yaml#/Get'
