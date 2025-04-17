@@ -137,3 +137,5 @@ paths:
   /applications/{applicationId}:
     patch:
       $ref: './study-application/feature/update.yaml#/Patch'
+    delete:
+      $ref: './study-application/feature/cancel.yaml#/Delete'
