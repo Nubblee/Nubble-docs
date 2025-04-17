@@ -22,6 +22,8 @@ Resource:
           $ref: './attribute.yaml#/ClosedAt'
         closedReason:
           $ref: './attribute.yaml#/ClosedReason'
+        applicationFormContent:
+          $ref: './attribute.yaml#/ApplicationFormContent'
         status:
           $ref: './attribute.yaml#/Status'
         createdAt:
@@ -39,8 +41,6 @@ Resource:
       properties:
         studyGroup:
           $ref: '../study-group/relationship.yaml#/ToOne'
-        applicationForm:
-          $ref: '../application-form/relationship.yaml#/ToOne'
     links:
       type: object
       properties:

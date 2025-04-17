@@ -3,10 +3,21 @@ StudyGroupId:
   description: 스터디 그룹 고유 식별자
   example: "456"
 
-ApplicationFormId:
+ApplicationFormContent:
   type: string
-  description: 신청서 양식 고유 식별자
-  example: "789"
+  description: |
+    신청서 양식 내용 (단순 텍스트 형식)
+    각 줄은 하나의 질문 항목을 나타냅니다.
+    지원자는 각 질문 뒤에 답변을 작성합니다.
+  example: |
+    알고리즘 학습 경험:
+    지원 동기:
+    사용 가능한 프로그래밍 언어:
+    코딩테스트 풀이 경험:
+    참여 가능 시간:
+    주당 투자 가능 시간:
+  maxLength: 5000
+  nullable: true
 
 Title:
   type: string

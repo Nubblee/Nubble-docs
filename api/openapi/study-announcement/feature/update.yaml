@@ -106,8 +106,8 @@ Request:
               $ref: '../attribute.yaml#/StartDateTime'
             endDateTime:
               $ref: '../attribute.yaml#/EndDateTime'
-            applicationFormId:
-              $ref: '../attribute.yaml#/ApplicationFormId'
+            applicationFormContent:
+              $ref: '../attribute.yaml#/ApplicationFormContent'
           additionalProperties: false
       required:
         - type
