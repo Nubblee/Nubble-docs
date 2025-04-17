@@ -12,13 +12,6 @@ Post:
     - 승인된 지원자 수가 모집 인원에 도달하면 자동으로 모집이 마감됩니다 (closedReason: AUTO_CAPACITY_REACHED)
     - 모집 마감 일시(EndDateTime)에 도달하면 자동으로 마감됩니다 (closedReason: AUTO_DEADLINE_REACHED)
   operationId: createStudyAnnouncement
-  parameters:
-    - name: studyGroupId
-      in: path
-      required: true
-      description: 공고를 생성할 스터디 그룹의 고유 식별자
-      schema:
-        type: string
   requestBody:
     required: true
     content:
@@ -105,6 +98,8 @@ Request:
         attributes:
           type: object
           properties:
+            studyGroupId:
+              $ref: '../attribute.yaml#/StudyGroupId'
             title:
               $ref: '../attribute.yaml#/Title'
             description:
@@ -118,6 +113,7 @@ Request:
             applicationFormId:
               $ref: '../attribute.yaml#/ApplicationFormId'
           required:
+            - studyGroupId
             - title
             - recruitCapacity
             - startDateTime

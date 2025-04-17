@@ -10,23 +10,21 @@ Get:
   operationId: listStudyAnnouncements
   security: []
   parameters:
-    - name: studyGroupId
-      in: path
-      required: true
-      description: 공고가 속한 스터디 그룹의 고유 식별자
-      schema:
-        type: string
-    - name: filter[status]
+    - name: filter
       in: query
       required: false
       description: |
-        공고 상태 필터
-        - RECRUITING: 모집중인 공고만 표시
-        - CLOSED: 모집 완료된 공고만 표시
-        - 생략 시: 모든 상태의 공고 표시
-      schema:
-        type: string
-        enum: [RECRUITING, CLOSED]
+        공고 필터링 조건 (복수 적용 가능)
+        
+        지원되는 필터:
+        - filter[studyGroupId] - 특정 스터디 그룹의 공고만 조회 (예: 456)
+        - filter[status] - 공고 상태 필터 (RECRUITING: 모집중, CLOSED: 모집완료)
+        
+        사용 예시:
+        - 모든 공고 조회: (필터 생략)
+        - 특정 스터디 공고만 조회: filter[studyGroupId]=456
+        - 모집중인 공고만 조회: filter[status]=RECRUITING
+        - 특정 스터디의 모집중 공고: filter[studyGroupId]=456&filter[status]=RECRUITING
     - $ref: '../../jsonapi/pagination.yaml#/PageNumber'
     - $ref: '../../jsonapi/pagination.yaml#/PageSize'
     - name: sort

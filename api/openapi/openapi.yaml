@@ -112,18 +112,18 @@ paths:
       $ref: './problem/feature/delete.yaml#/Delete'
 
   # 스터디 모집 공고 API
-  /study-groups/{studyGroupId}/announcements:
+  /announcements:
     post:
       $ref: './study-announcement/feature/create.yaml#/Post'
     get:
       $ref: './study-announcement/feature/list.yaml#/Get'
-  /study-groups/{studyGroupId}/announcements/{announcementId}:
+  /announcements/{announcementId}:
     get:
       $ref: './study-announcement/feature/get.yaml#/Get'
     patch:
       $ref: './study-announcement/feature/update.yaml#/Patch'
     delete:
       $ref: './study-announcement/feature/delete.yaml#/Delete'
-  /study-groups/{studyGroupId}/announcements/{announcementId}/close:
+  /announcements/{announcementId}/close:
     post:
       $ref: './study-announcement/feature/close.yaml#/Post'
