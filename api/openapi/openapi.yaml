@@ -163,3 +163,5 @@ paths:
   /user/favorite-announcements/{announcementId}:
     put:
       $ref: './favorite-announcement/feature/set.yaml#/Put'
+    delete:
+      $ref: './favorite-announcement/feature/unset.yaml#/Delete'
