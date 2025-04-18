@@ -165,3 +165,6 @@ paths:
       $ref: './favorite-announcement/feature/set.yaml#/Put'
     delete:
       $ref: './favorite-announcement/feature/unset.yaml#/Delete'
+  /user/favorite-announcements:
+    get:
+      $ref: './favorite-announcement/feature/list.yaml#/Get'
