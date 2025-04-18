@@ -158,3 +158,8 @@ paths:
   /applications/{applicationId}/reject:
     post:
       $ref: './study-application/feature/reject.yaml#/Post'
+
+  # 관심 모집 공고 API
+  /user/favorite-announcements/{announcementId}:
+    put:
+      $ref: './favorite-announcement/feature/set.yaml#/Put'
