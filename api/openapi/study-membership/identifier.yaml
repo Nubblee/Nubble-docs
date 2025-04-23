@@ -1,0 +1,17 @@
+Type:
+  type: string
+  enum: [study-memberships]
+  default: study-memberships
+
+MembershipId:
+  type: string
+  description: 멤버십 고유 식별자
+  example: "456"
+
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/MembershipId'

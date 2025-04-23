@@ -1,0 +1,20 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/MembershipId'
+    attributes:
+      type: object
+      properties:
+        role:
+          $ref: './attribute.yaml#/Role'
+        status:
+          $ref: './attribute.yaml#/Status'
+        joinedAt:
+          $ref: './attribute.yaml#/JoinedAt'
+        withdrawnAt:
+          $ref: './attribute.yaml#/WithdrawnAt'
+        withdrawnReason:
+          $ref: './attribute.yaml#/WithdrawnReason'

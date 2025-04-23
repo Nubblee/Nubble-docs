@@ -1,0 +1,17 @@
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    studyGroupId:
+      $ref: '#/StudyGroupId'
+
+Type:
+  type: string
+  enum: [study-groups]
+  default: study-groups
+
+StudyGroupId:
+  type: string
+  description: 스터디 그룹 고유 식별자
+  example: "123"

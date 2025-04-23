@@ -76,6 +76,9 @@ paths:
   /study-groups/{studyGroupId}/membership:
     delete:
       $ref: './study-group/feature/leave.yaml#/Delete'
+  /user/study-groups:
+    get:
+      $ref: './study-group/feature/my-study-groups.yaml#/Get'
 
   # 스터디 공지사항 API
   /study-groups/{studyGroupId}/notices:

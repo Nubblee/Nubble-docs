@@ -1,0 +1,27 @@
+Owner:
+  type: object
+  properties:
+    owner:
+      type: object
+      properties:
+        data:
+          $ref: '../user/identifier.yaml#/Identifier'
+        links:
+          type: object
+          properties:
+            related:
+              $ref: '../user/links.yaml#/Self'
+
+  StudyGroup:
+    type: object
+    properties:
+      studyGroup:
+        type: object
+        properties:
+          data:
+            $ref: '../study-group/identifier.yaml#/Identifier'
+          links:
+            type: object
+            properties:
+              related:
+                $ref: '../study-group/link.yaml#/Self'

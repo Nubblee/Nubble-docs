@@ -1,0 +1,44 @@
+UserId:
+  type: string
+  description: 멤버십 소유 사용자 ID
+  example: "789"
+
+StudyGroupId:
+  type: string
+  description: 소속 스터디 그룹 ID
+  example: "123"
+
+Role:
+  type: string
+  enum: [LEADER, MEMBER]
+  description: 역할 (스터디장/스터디원)
+  example: "LEADER"
+
+Status:
+  type: string
+  enum: [ACTIVE, WITHDRAWN, FORCED_WITHDRAWN]
+  description: |
+    멤버십 상태
+    - ACTIVE: 활성 (현재 참여 중)
+    - WITHDRAWN: 탈퇴 (사용자가 자발적으로 탈퇴)
+    - FORCED_WITHDRAWN: 강제 탈퇴 (스터디장에 의해 강제 탈퇴됨)
+  example: "ACTIVE"
+
+JoinedAt:
+  type: string
+  format: date-time
+  description: 스터디 가입 일시
+  example: "2025-04-15T10:30:00Z"
+
+WithdrawnAt:
+  type: string
+  format: date-time
+  description: 스터디 탈퇴 일시 (탈퇴한 경우에만 존재)
+  example: "2025-06-20T18:45:00Z"
+  nullable: true
+
+WithdrawnReason:
+  type: string
+  description: 탈퇴 사유 (강제 탈퇴의 경우 스터디장이 작성)
+  example: "스터디 규칙 위반"
+  nullable: true
