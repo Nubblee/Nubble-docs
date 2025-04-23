@@ -63,7 +63,15 @@ Spring Boot 3에서 구현합니다.(구현 상세: [ProblemJSON-Springboot3/REA
     - 파일명: 소문자, 하이픈 사용 (e.g., `api.yaml`, `schemas.yaml`)
     - 스키마: PascalCase (e.g., `UserResource`, `StudyResponse`)
         - Spring Boot와의 통일성을 위해 Java 클래스 명명 규칙과 일치시킴
+          경로 변수: camelCase (e.g., userId, studyId)
     - 경로 변수: camelCase (e.g., `userId`, `studyId`)
+      - 리소스명(kebab-case)과 시각적으로 구분하기 위해 camelCase 사용 
+      - 경로 변수는 리소스 식별자로서 Java 객체의 필드명과 직접 매핑될 때가 많아 camelCase가 적합함 
+      - 예: /studies/{studyId}/members/{memberId} - 여기서 studyId와 memberId는 경로 변수
+    - 리소스명: kebab-case (e.g., `coding-tests`, `study-members`)
+      - URI의 스키마(scheme)와 호스트(host)는 대소문자를 구별하지 않지만 경로(path), 쿼리(query), 프래그먼트(fragment)는 대소문자를 구별함 
+          - 그러나 일관성 유지와 가독성을 위해 항상 kebab-case 형식만 사용
+      - snake_case는 하이퍼링크와 같이 밑줄이 쳐져 있으면 공백으로 구별되어 사용하지 않음
     - 쿼리 파라미터: kebab-case (e.g., `page[filter-by]`, `sort-direction`)
         - RFC 3986 표준 준수: URI 경로 세그먼트는 대소문자를 구분하지만 실제 구현에서는 혼란 방지를 위해 소문자 통일이 권장됨
         - 가독성: 카멜케이스는 URL에서 가독성이 떨어지고, 스네이크케이스는 밑줄과 함께 있을 때 구별하기 어려움
