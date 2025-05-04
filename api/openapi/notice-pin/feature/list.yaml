@@ -56,7 +56,7 @@ Response:
       type: array
       description: 공지사항 고정 목록
       items:
-        $ref: '../resource.yaml#/Resource'
+        $ref: '../resource.yaml#/MainResource'
     links:
       type: object
       properties:
