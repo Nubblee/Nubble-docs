@@ -96,8 +96,8 @@ paths:
 
   # 공지사항 고정 API
   /study-groups/{studyGroupId}/notice-pins:
-    post:
-      $ref: './notice-pin/feature/pin.yaml#/Post'
+    put:
+      $ref: './notice-pin/feature/pin.yaml#/Put'
     get:
       $ref: './notice-pin/feature/list.yaml#/Get'
   /study-groups/{studyGroupId}/notice-pins/{noticeId}:
