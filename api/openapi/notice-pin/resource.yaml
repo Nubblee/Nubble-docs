@@ -1,17 +1,15 @@
 Resource:
   type: object
-  allOf:
-    - $ref: './identifier.yaml#/Identifier'
   properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/NoticePinId'
     attributes:
       type: object
       properties:
-        noticeId:
-          $ref: './attribute.yaml#/NoticeId'
         pinnedAt:
           $ref: './attribute.yaml#/PinnedAt'
-        pinnedBy:
-          $ref: './attribute.yaml#/PinnedBy'
         order:
           $ref: './attribute.yaml#/Order'
     relationships:

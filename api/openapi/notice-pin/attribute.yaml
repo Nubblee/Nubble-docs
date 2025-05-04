@@ -1,18 +1,8 @@
-NoticeId:
-  type: string
-  description: 고정할/고정된 공지사항의 고유 식별자
-  example: "456"
-
 PinnedAt:
   type: string
   format: date-time
   description: 공지사항 고정 설정 시간
   example: "2025-05-01T14:30:00Z"
-
-PinnedBy:
-  type: string
-  description: 공지사항 고정 설정한 사용자(스터디장) ID
-  example: "123"
 
 Order:
   type: integer

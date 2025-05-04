@@ -2,8 +2,7 @@ ToOne:
   type: object
   properties:
     data:
-      allOf:
-        - $ref: '../study-notice/identifier.yaml#/Identifier'
+      $ref: '../study-notice/identifier.yaml#/Identifier'
     links:
       type: object
       properties:

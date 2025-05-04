@@ -1,11 +1,3 @@
-Identifier:
-  type: object
-  properties:
-    type:
-      $ref: '#/Type'
-    id:
-      $ref: '#/NoticePinId'
-
 Type:
   type: string
   enum: [notice-pin]
