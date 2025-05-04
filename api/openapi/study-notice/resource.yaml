@@ -22,7 +22,7 @@ Resource:
       type: object
       properties:
         author:
-          $ref: '../user/relationship.yaml#/User'
+          $ref: '../user/relationship.yaml#/ToOne'
     links:
       type: object
       properties:

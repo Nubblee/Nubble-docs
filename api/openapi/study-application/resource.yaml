@@ -26,9 +26,9 @@ Resource:
         announcement:
           $ref: '../study-announcement/relation.yaml#/ToOne'
         applicant:
-          $ref: '../user/relationship.yaml#/User'
+          $ref: '../user/relationship.yaml#/ToOne'
         reviewer:
-          $ref: '../user/relationship.yaml#/User'
+          $ref: '../user/relationship.yaml#/ToOne'
     links:
       type: object
       properties:

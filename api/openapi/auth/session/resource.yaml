@@ -17,7 +17,7 @@ Resource:
             type: object
             properties:
               user:
-                $ref: '../../user/relationship.yaml#/User'
+                $ref: '../../user/relationship.yaml#/ToOne'
     meta:
       type: object
       properties:

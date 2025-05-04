@@ -2,38 +2,40 @@ Resource:
   type: object
   properties:
     data:
-      allOf:
-        - $ref: './identifier.yaml#/Identifier'
-        - type: object
+      type: object
+      properties:
+        type:
+          $ref: './identifier.yaml#/Type'
+        id:
+          $ref: './identifier.yaml#/ProblemId'
+        attributes:
+          type: object
           properties:
-            attributes:
-              type: object
-              properties:
-                title:
-                  $ref: './attribute.yaml#/Title'
-                url:
-                  $ref: './attribute.yaml#/Url'
-                description:
-                  $ref: './attribute.yaml#/Description'
-                memo:
-                  $ref: './attribute.yaml#/Memo'
-                status:
-                  $ref: './attribute.yaml#/Status'
-                creatorId:
-                  $ref: './attribute.yaml#/CreatorId'
-                createdAt:
-                  $ref: './attribute.yaml#/CreatedAt'
-                updatedAt:
-                  $ref: './attribute.yaml#/UpdatedAt'
-            relationships:
-              type: object
-              properties:
-                creator:
-                  $ref: '../user/relationship.yaml#/User'
-                studyGroup:
-                  $ref: '../study-group/relationship.yaml#/ToOne'
-            links:
-              type: object
-              properties:
-                self:
-                  $ref: './link.yaml#/Self'
+            title:
+              $ref: './attribute.yaml#/Title'
+            url:
+              $ref: './attribute.yaml#/Url'
+            description:
+              $ref: './attribute.yaml#/Description'
+            memo:
+              $ref: './attribute.yaml#/Memo'
+            status:
+              $ref: './attribute.yaml#/Status'
+            creatorId:
+              $ref: './attribute.yaml#/CreatorId'
+            createdAt:
+              $ref: './attribute.yaml#/CreatedAt'
+            updatedAt:
+              $ref: './attribute.yaml#/UpdatedAt'
+        relationships:
+          type: object
+          properties:
+            creator:
+              $ref: '../user/relationship.yaml#/ToOne'
+            studyGroup:
+              $ref: '../study-group/relationship.yaml#/ToOne'
+        links:
+          type: object
+          properties:
+            self:
+              $ref: './link.yaml#/Self'

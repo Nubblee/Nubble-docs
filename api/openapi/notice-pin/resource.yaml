@@ -18,4 +18,4 @@ Resource:
         notice:
           $ref: '../study-notice/relationship.yaml#/ToOne'
         pinnedBy:
-          $ref: '../user/relationship.yaml#/User'
+          $ref: '../user/relationship.yaml#/ToOne'
