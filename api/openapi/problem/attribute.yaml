@@ -30,11 +30,6 @@ Status:
   default: REGISTERED
   example: "REGISTERED"
 
-CreatorId:
-  type: string
-  description: 문제 등록자 ID
-  example: "123"
-
 CreatedAt:
   type: string
   format: date-time

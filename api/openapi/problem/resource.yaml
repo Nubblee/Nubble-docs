@@ -1,4 +1,4 @@
-Resource:
+MainResource:
   type: object
   properties:
     data:
@@ -21,8 +21,6 @@ Resource:
               $ref: './attribute.yaml#/Memo'
             status:
               $ref: './attribute.yaml#/Status'
-            creatorId:
-              $ref: './attribute.yaml#/CreatorId'
             createdAt:
               $ref: './attribute.yaml#/CreatedAt'
             updatedAt:
