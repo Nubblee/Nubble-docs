@@ -1,4 +1,4 @@
-Resource:
+MainResource:
   type: object
   properties:
     type:

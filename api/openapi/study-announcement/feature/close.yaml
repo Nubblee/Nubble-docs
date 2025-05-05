@@ -32,7 +32,7 @@ Post:
       content:
         application/vnd.api+json:
           schema:
-            $ref: '../resource.yaml#/Resource'
+            $ref: '../resource.yaml#/MainResource'
     '401':
       description: 인증되지 않은 요청
       content:

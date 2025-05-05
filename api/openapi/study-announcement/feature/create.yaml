@@ -98,8 +98,6 @@ Request:
         attributes:
           type: object
           properties:
-            studyGroupId:
-              $ref: '../attribute.yaml#/StudyGroupId'
             title:
               $ref: '../attribute.yaml#/Title'
             description:
@@ -120,9 +118,31 @@ Request:
             - endDateTime
             - applicationFormId
           additionalProperties: false
+        relationships:
+          type: object
+          properties:
+            studyGroup:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [ study-groups ]
+                    id:
+                      type: string
+                  required:
+                    - type
+                    - id
+              required:
+                - data
+          required:
+            - studyGroup
       required:
         - type
         - attributes
+        - relationships
       additionalProperties: false
   required:
     - data
@@ -132,4 +152,4 @@ Response:
   type: object
   properties:
     data:
-      $ref: '../resource.yaml#/Resource'
+      $ref: '../resource.yaml#/MainResource'

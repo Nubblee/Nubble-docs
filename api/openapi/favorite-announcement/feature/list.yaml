@@ -52,7 +52,7 @@ Get:
                 type: array
                 description: 관심 모집 공고 목록
                 items:
-                  $ref: '../../study-announcement/resource.yaml#/Resource'
+                  $ref: '../../study-announcement/resource.yaml#/MainResource'
               meta:
                 $ref: '../../jsonapi/pagination-meta.yaml#/PaginationMeta'
               links:

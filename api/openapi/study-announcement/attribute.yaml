@@ -1,8 +1,3 @@
-StudyGroupId:
-  type: string
-  description: 스터디 그룹 고유 식별자
-  example: "456"
-
 ApplicationFormContent:
   type: string
   description: |

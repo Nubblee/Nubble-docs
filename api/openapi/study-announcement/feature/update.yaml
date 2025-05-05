@@ -122,4 +122,4 @@ Response:
   type: object
   properties:
     data:
-      $ref: '../resource.yaml#/Resource'
+      $ref: '../resource.yaml#/MainResource'

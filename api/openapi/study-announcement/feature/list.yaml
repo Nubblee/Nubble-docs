@@ -74,7 +74,7 @@ Response:
       type: array
       description: 스터디 모집 공고 목록
       items:
-        $ref: '../resource.yaml#/Resource'
+        $ref: '../resource.yaml#/MainResource'
     meta:
       $ref: '../../jsonapi/pagination-meta.yaml#/PaginationMeta'
     links:
