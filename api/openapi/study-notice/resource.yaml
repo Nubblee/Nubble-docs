@@ -1,4 +1,4 @@
-Resource:
+MainResource:
   type: object
   properties:
     type:
@@ -8,8 +8,6 @@ Resource:
     attributes:
       type: object
       properties:
-        authorId:
-          $ref: './attribute.yaml#/AuthorId'
         title:
           $ref: './attribute.yaml#/Title'
         content:

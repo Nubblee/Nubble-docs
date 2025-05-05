@@ -68,7 +68,7 @@ Response:
       items:
         oneOf:
           - $ref: '../../user/resource.yaml#/PublicResource'
-          - $ref: '../../study-notice/resource.yaml#/Resource'
+          - $ref: '../../study-notice/resource.yaml#/MainResource'
     meta:
       type: object
       properties:
