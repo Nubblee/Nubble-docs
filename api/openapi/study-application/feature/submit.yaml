@@ -82,17 +82,37 @@ Request:
         attributes:
           type: object
           properties:
-            announcementId:
-              $ref: '../attribute.yaml#/AnnouncementId'
             content:
               $ref: '../attribute.yaml#/Content'
           required:
-            - announcementId
             - content
+          additionalProperties: false
+        relationships:
+          type: object
+          properties:
+            announcement:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [ study-announcements ]
+                    id:
+                      type: string
+                  required:
+                    - type
+                    - id
+              required:
+                - data
+          required:
+            - announcement
           additionalProperties: false
       required:
         - type
         - attributes
+        - relationships
       additionalProperties: false
   required:
     - data

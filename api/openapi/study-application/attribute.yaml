@@ -1,13 +1,3 @@
-AnnouncementId:
-  type: string
-  description: 연결된 스터디 공고 ID
-  example: "456"
-
-ApplicantId:
-  type: string
-  description: 지원자 ID
-  example: "789"
-
 Content:
   type: string
   description: |

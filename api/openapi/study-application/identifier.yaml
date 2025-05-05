@@ -1,11 +1,3 @@
-Identifier:
-  type: object
-  properties:
-    type:
-      $ref: '#/Type'
-    id:
-      $ref: '#/ApplicationId'
-
 Type:
   type: string
   enum: [study-applications]
