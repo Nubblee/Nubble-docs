@@ -91,4 +91,4 @@ Response:
   type: object
   properties:
     data:
-      $ref: '../resource.yaml#/MainResource'
+      $ref: '../resource.yaml#/Resource'

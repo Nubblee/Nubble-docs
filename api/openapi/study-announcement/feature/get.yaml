@@ -40,7 +40,7 @@ Response:
   type: object
   properties:
     data:
-      $ref: '../resource.yaml#/MainResource'
+      $ref: '../resource.yaml#/Resource'
     included:
       type: array
       description: 포함된 관련 리소스 (include 파라미터에 지정된 경우)
