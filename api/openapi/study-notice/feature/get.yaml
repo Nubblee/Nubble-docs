@@ -18,6 +18,13 @@ Get:
       description: 조회할 공지사항의 고유 식별자
       schema:
         type: string
+    - name: include
+      in: query
+      required: false
+      description: 포함할 관련 리소스 (쉼표로 구분)
+      schema:
+        type: string
+        enum: [author]
   responses:
     '200':
       description: 공지사항 조회 성공
@@ -37,3 +44,8 @@ Response:
   properties:
     data:
       $ref: '../resource.yaml#/MainResource'
+    included:
+      type: array
+      description: 포함된 관련 리소스 (include 파라미터에 지정된 경우)
+      items:
+        $ref: '../../user/resource.yaml#/PublicResource'
