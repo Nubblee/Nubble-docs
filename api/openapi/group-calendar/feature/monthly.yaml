@@ -19,8 +19,7 @@ Get:
     모든 시간 정보는 UTC로 저장되며, 메타데이터에 타임존 정보가 포함됩니다.
     인증 없이 접근 가능한 공개 API입니다.
   operationId: getStudyGroupMonthlyCalendar
-  security:
-    - AuthSession: [ ]
+  security: []
   parameters:
     - name: studyGroupId
       in: path
