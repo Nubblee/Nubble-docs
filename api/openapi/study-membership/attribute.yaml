@@ -1,13 +1,3 @@
-UserId:
-  type: string
-  description: 멤버십 소유 사용자 ID
-  example: "789"
-
-StudyGroupId:
-  type: string
-  description: 소속 스터디 그룹 ID
-  example: "123"
-
 Role:
   type: string
   enum: [LEADER, MEMBER]

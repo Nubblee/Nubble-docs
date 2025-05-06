@@ -18,3 +18,11 @@ Resource:
           $ref: './attribute.yaml#/WithdrawnAt'
         withdrawnReason:
           $ref: './attribute.yaml#/WithdrawnReason'
+    relationships:
+      type: object
+      properties:
+        owner:
+          $ref: '../user/relationship.yaml#/ToOne'
+        studyGroup:
+          $ref: '../study-group/relationship.yaml#/ToOne'
+

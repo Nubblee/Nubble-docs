@@ -126,10 +126,5 @@ Response:
       description: 포함된 관련 리소스 (include 파라미터에 지정된 경우)
       items:
         oneOf:
-          - allOf:
-              - $ref: '../../study-membership/resource.yaml#/Resource'
-              - type: object
-                properties:
-                  relationships:
-                    $ref: '../../study-membership/relationship.yaml#/Owner'
+          - $ref: '../../study-membership/resource.yaml#/Resource'
           - $ref: '../../user/resource.yaml#/PublicResource'
