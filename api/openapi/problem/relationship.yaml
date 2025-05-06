@@ -1,0 +1,6 @@
+ToOne:
+  type: object
+  description: 문제에 직접 접근할 수 있는 URI
+  properties:
+    data:
+      $ref: './identifier.yaml#/Identifier'

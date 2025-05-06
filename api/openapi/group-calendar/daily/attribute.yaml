@@ -1,0 +1,11 @@
+Date:
+  type: string
+  format: date
+  description: 캘린더 날짜 (YYYY-MM-DD)
+  example: "2025-05-01"
+
+ProblemCount:
+  type: integer
+  description: 해당 일자에 할당된 문제 수
+  example: 3
+  minimum: 0

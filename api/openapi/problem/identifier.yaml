@@ -3,7 +3,15 @@ Type:
   enum: [coding-test-problems]
   default: coding-test-problems
 
-ProblemId:
+Id:
   type: string
   description: 문제 고유 식별자
   example: "123"
+
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/Id'

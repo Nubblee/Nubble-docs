@@ -1,0 +1,20 @@
+MemberStatistics:
+  type: array
+  description: 멤버별 문제 풀이 통계
+  items:
+    type: object
+    properties:
+      memberId:
+        type: string
+        description: 멤버 ID
+        example: "456"
+      memberDayViewId:
+        type: string
+        description: 멤버의 일별 뷰 리소스 ID
+        example: "group-123-daily-calendars-2025-05-01-member-456"
+      solvedCount:
+        type: integer
+        description: 해당 멤버가 해결한 문제 수
+        example: 3
+        minimum: 0
+

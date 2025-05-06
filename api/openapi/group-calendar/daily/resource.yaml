@@ -1,0 +1,24 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/Id'
+    attributes:
+      type: object
+      properties:
+        date:
+          $ref: './attribute.yaml#/Date'
+        problemCount:
+          $ref: './attribute.yaml#/ProblemCount'
+    relationships:
+      type: object
+      properties:
+        problems:
+          $ref: '../../problem/relationship.yaml#/ToOne'
+    meta:
+      type: object
+      properties:
+        memberStatistics:
+          $ref: './meta.yaml#/MemberStatistics'
