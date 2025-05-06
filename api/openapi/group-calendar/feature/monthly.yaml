@@ -86,7 +86,7 @@ Response:
       description: 포함된 관련 리소스
       items:
         oneOf:
-          - $ref: '../daily/resource.yaml#/Resource'
+          - $ref: '../daily/group/resource.yaml#/Resource'
     meta:
       type: object
       properties:
