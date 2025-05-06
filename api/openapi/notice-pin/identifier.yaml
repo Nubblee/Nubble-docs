@@ -1,7 +1,7 @@
 Type:
   type: string
-  enum: [notice-pin]
-  default: notice-pin
+  enum: [notice-pins]
+  default: notice-pins
 
 NoticePinId:
   type: string
