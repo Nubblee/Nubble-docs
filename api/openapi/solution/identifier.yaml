@@ -1,0 +1,17 @@
+Type:
+  type: string
+  enum: [solutions]
+  default: solutions
+
+Id:
+  type: string
+  description: 풀이 고유 식별자
+  example: "solution-123"
+
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/Id'

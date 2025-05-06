@@ -1,0 +1,13 @@
+ToOne:
+  type: object
+  properties:
+    data:
+      $ref: './identifier.yaml#/Identifier'
+    links:
+      type: object
+      properties:
+        related:
+          type: string
+          format: uri
+          description: 풀이 리소스에 직접 접근할 수 있는 URI
+          example: "/api/v1/solutions/solution-123"

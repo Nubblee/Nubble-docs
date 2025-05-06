@@ -1,0 +1,28 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/Id'
+    attributes:
+      type: object
+      properties:
+        title:
+          $ref: './attribute.yaml#/Title'
+        status:
+          $ref: './attribute.yaml#/Status'
+        submittedAt:
+          $ref: './attribute.yaml#/SubmittedAt'
+    relationships:
+      type: object
+      properties:
+        problem:
+          $ref: '../problem/relationship.yaml#/ToOne'
+        author:
+          $ref: '../user/relationship.yaml#/ToOne'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'

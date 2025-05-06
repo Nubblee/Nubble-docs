@@ -1,0 +1,18 @@
+Title:
+  type: string
+  description: 풀이 제목
+  example: "HashMap을 이용한 Two Sum 풀이"
+  maxLength: 100
+
+Status:
+  type: string
+  enum: [COMPLETED]
+  description: 풀이 상태 (현재 버전에서는 COMPLETED만 지원)
+  default: "COMPLETED"
+  example: "COMPLETED"
+
+SubmittedAt:
+  type: string
+  format: date-time
+  description: 풀이 제출 시간
+  example: "2025-05-01T15:30:00Z"
