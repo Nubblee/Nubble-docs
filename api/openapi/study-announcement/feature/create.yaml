@@ -116,7 +116,7 @@ Request:
             - recruitCapacity
             - startDateTime
             - endDateTime
-            - applicationFormId
+            - applicationFormContent
           additionalProperties: false
         relationships:
           type: object
