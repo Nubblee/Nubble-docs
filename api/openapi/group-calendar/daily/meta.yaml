@@ -1,13 +1,18 @@
+# 멤버 통계 메타 정보
 MemberStatistics:
   type: array
-  description: 멤버별 문제 풀이 통계
+  description: 멤버별 문제 풀이 통계 (프론트엔드 표시용 간소화된 정보)
   items:
     type: object
     properties:
-      memberId:
+      userId:
         type: string
-        description: 멤버 ID
+        description: 사용자 ID
         example: "456"
+      nickname:
+        type: string
+        description: 사용자 닉네임
+        example: "홍길동"
       memberDayViewId:
         type: string
         description: 멤버의 일별 뷰 리소스 ID
@@ -17,4 +22,3 @@ MemberStatistics:
         description: 해당 멤버가 해결한 문제 수
         example: 3
         minimum: 0
-

@@ -78,7 +78,7 @@ Request:
         type:
           $ref: '../identifier.yaml#/Type'
         id:
-          $ref: '../identifier.yaml#/ProblemId'
+          $ref: '../identifier.yaml#/Id'
         attributes:
           type: object
           description: |

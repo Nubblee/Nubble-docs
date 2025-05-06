@@ -12,11 +12,6 @@ Resource:
           $ref: './attribute.yaml#/Date'
         problemCount:
           $ref: './attribute.yaml#/ProblemCount'
-    relationships:
-      type: object
-      properties:
-        problems:
-          $ref: '../../problem/relationship.yaml#/ToOne'
     meta:
       type: object
       properties:

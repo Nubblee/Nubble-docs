@@ -1,0 +1,17 @@
+Type:
+  type: string
+  enum: [monthly-calendars]
+  default: monthly-calendars
+
+Id:
+  type: string
+  description: 월간 캘린더 고유 식별자
+  example: "group-123-monthly-calendars-2025-05"
+
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/Id'

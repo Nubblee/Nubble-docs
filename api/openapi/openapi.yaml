@@ -35,6 +35,8 @@ tags:
     description: 스터디 모집 공고 관련 API
   - name: Study Application API
     description: 스터디 신청 및 지원서 관리 관련 API
+  - name: Group Calendar API
+    description: 스터디 그룹 캘린더 뷰 API
 
 paths:
   # 사용자 API
@@ -171,3 +173,8 @@ paths:
   /user/favorite-announcements:
     get:
       $ref: './favorite-announcement/feature/list.yaml#/Get'
+
+  # 스터디 캘린더 API
+  /study-groups/{studyGroupId}/calendar/monthly:
+    get:
+      $ref: './group-calendar/feature/monthly.yaml#/Get'

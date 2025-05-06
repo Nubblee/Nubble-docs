@@ -1,0 +1,26 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/Id'
+    attributes:
+      type: object
+      properties:
+        year:
+          $ref: './attribute.yaml#/Year'
+        month:
+          $ref: './attribute.yaml#/Month'
+    relationships:
+      type: object
+      properties:
+        studyGroup:
+          $ref: '../../study-group/relationship.yaml#/ToOne'
+        dailyCalendars:
+          $ref: '../daily/relationship.yaml#/ToMany'
+    links:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'
