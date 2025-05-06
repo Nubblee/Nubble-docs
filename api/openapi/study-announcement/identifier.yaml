@@ -7,3 +7,11 @@ AnnouncementId:
   type: string
   description: 스터디 공고 고유 식별자
   example: "123"
+
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    announcementId:
+      $ref: '#/AnnouncementId'

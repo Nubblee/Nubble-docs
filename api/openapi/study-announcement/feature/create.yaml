@@ -125,18 +125,7 @@ Request:
               type: object
               properties:
                 data:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      enum: [ study-groups ]
-                    id:
-                      type: string
-                  required:
-                    - type
-                    - id
-              required:
-                - data
+                  $ref: '../../study-group/identifier.yaml#/Identifier'
           required:
             - studyGroup
       required:
