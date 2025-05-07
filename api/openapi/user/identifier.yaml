@@ -3,7 +3,7 @@ Identifier:
   properties:
     type:
       $ref: '#/Type'
-    UserId:
+    id:
       $ref: '#/UserId'
 
 Type:

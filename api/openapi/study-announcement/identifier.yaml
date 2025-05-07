@@ -13,5 +13,5 @@ Identifier:
   properties:
     type:
       $ref: '#/Type'
-    announcementId:
+    id:
       $ref: '#/AnnouncementId'
