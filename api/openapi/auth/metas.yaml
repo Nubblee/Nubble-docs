@@ -1,7 +1,29 @@
-HeaderName:
+CookieName:
   type: string
   description: |
-    세션 ID를 포함해야 하는 HTTP 헤더 이름 (키)
-    클라이언트는 이 헤더 이름으로 sessionId를 모든 인증된 요청에 포함해야 함
+    세션 ID를 포함하는 쿠키 이름
+    클라이언트는 이 쿠키를 통해 모든 인증된 요청에 세션 ID가 포함됩니다
   default: "Auth-Session-Id"
   example: "Auth-Session-Id"
+
+CookieSettings:
+  type: object
+  description: 세션 쿠키 설정
+  properties:
+    httpOnly:
+      type: boolean
+      description: JavaScript에서 쿠키에 접근할 수 없도록 설정 (보안)
+      default: true
+    sameSite:
+      type: string
+      description: CSRF 공격 방지를 위한 SameSite 설정
+      enum: [Strict, Lax, None]
+      default: "Lax"
+    path:
+      type: string
+      description: 쿠키가 유효한 경로
+      default: "/"
+    maxAge:
+      type: integer
+      description: 쿠키 만료 시간 (초)
+      example: 86400  # 24시간

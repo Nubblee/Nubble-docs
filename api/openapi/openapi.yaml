@@ -14,9 +14,9 @@ components:
   securitySchemes:
     AuthSession:
       type: apiKey
-      in: header
+      in: cookie
       name: Auth-Session-Id
-      description: 로그인 시 발급된 인증 세션 ID
+      description: 로그인 시 발급된 인증 세션 ID (쿠키에 저장됨)
 
 tags:
   - name: User API

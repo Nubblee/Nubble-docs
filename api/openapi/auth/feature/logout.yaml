@@ -13,30 +13,16 @@ Post:
     *열거 공격(enumeration attack) 방지: 401 오류를 반환하면 "유효한 세션이 있었다"는 정보를 간접적으로 알려줄 수 있습니다
   operationId: logout
   security:
-      - AuthSession: [ ]
-  requestBody:
-    required: true
-    content:
-      application/vnd.api+json:
-        schema:
-          $ref: '#/Request'
+    - AuthSession: [ ]
+  # 요청 본문 제거 - 쿠키를 통해 세션 식별
   responses:
     '204':
       description: 로그아웃 성공 (세션이 이미 없거나 유효하지 않은 경우에도 동일한 응답)
-
-Request:
-  type: object
-  properties:
-    data:
-      type: object
-      properties:
-        type:
-          $ref: '../type.yaml#/Type'
-        id:
-          $ref: '../session/attributes.yaml#/SessionId'
-      required:
-        - type
-      additionalProperties: false
-  required:
-    - data
-  additionalProperties: false
+      headers:
+        Set-Cookie:
+          description: |
+            인증 세션 ID 쿠키를 삭제하기 위한 헤더
+            만료 시간을 과거로 설정하여 브라우저에서 쿠키가 즉시 삭제되도록 함
+          schema:
+            type: string
+            example: "Auth-Session-Id=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax"
