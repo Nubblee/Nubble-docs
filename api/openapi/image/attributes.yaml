@@ -49,11 +49,11 @@ ExpiresAt:
     임시 이미지의 만료 시간
     - temporary 상태: 만료 일시 (보통 생성 후 24시간)
     - permanent 상태: null (만료되지 않음)
-  example: "2025-04-15T14:30:00Z"
+  example: "2025-04-15T14:30:00+09:00"
   nullable: true
 
 CreatedAt:
   type: string
   format: date-time
   description: 이미지 업로드 시간
-  example: "2025-04-14T14:30:00Z"
+  example: "2025-04-14T14:30:00+09:00"

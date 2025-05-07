@@ -5,8 +5,8 @@ Type:
 
 Id:
   type: string
-  description: 멤버 일별 캘린더 고유 식별자
-  example: "group-123-daily-calendars-2025-05-01-member-456"
+  description: 멤버 일별 캘린더 고유 식별자 (연도-월-일-사용자ID 형식)
+  example: "2025-05-01-456"
 
 Identifier:
   type: object

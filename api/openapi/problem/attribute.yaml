@@ -34,10 +34,10 @@ CreatedAt:
   type: string
   format: date-time
   description: 등록 일시
-  example: "2025-04-15T14:30:00Z"
+  example: "2025-04-15T14:30:00+09:00"
 
 UpdatedAt:
   type: string
   format: date-time
   description: 수정 일시
-  example: "2025-04-15T15:45:00Z"
+  example: "2025-04-15T15:45:00+09:00"

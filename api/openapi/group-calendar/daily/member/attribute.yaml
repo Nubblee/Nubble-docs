@@ -35,7 +35,7 @@ SolutionStatuses:
             type: string
             format: date-time
             description: 문제 해결 시간 (풀이가 있는 경우)
-            example: "2025-05-01T15:30:00Z"
+            example: "2025-05-01T15:30:00+09:00"
             nullable: true
           id:
             type: string

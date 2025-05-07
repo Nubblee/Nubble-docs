@@ -36,16 +36,6 @@ Get:
         minimum: 1
         maximum: 12
       example: 5
-    - name: timezone
-      in: query
-      required: false
-      description: |
-        선호하는 타임존 (IANA 타임존 형식).
-        지정하지 않으면 기본값으로 Asia/Seoul(KST)이 사용됩니다.
-      schema:
-        type: string
-        default: "Asia/Seoul"
-      example: "Asia/Seoul"
   responses:
     '200':
       description: 월간 캘린더 조회 성공
@@ -71,10 +61,3 @@ Response:
   properties:
     data:
       $ref: '../monthly/resource.yaml#/Resource'
-    meta:
-      type: object
-      properties:
-        timezone:
-          type: string
-          description: 응답에 사용된 IANA 타임존 식별자
-          example: "Asia/Seoul"

@@ -15,4 +15,4 @@ SubmittedAt:
   type: string
   format: date-time
   description: 풀이 제출 시간
-  example: "2025-05-01T15:30:00Z"
+  example: "2025-05-01T15:30:00+09:00"

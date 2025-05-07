@@ -37,13 +37,13 @@ SubmittedAt:
   type: string
   format: date-time
   description: 제출 일시
-  example: "2025-05-05T14:30:00Z"
+  example: "2025-05-05T14:30:00+09:00"
 
 UpdatedAt:
   type: string
   format: date-time
   description: 수정 일시
-  example: "2025-05-05T15:45:00Z"
+  example: "2025-05-05T15:45:00+09:00"
 
 ReviewedAt:
   type: string
@@ -51,5 +51,5 @@ ReviewedAt:
   description: |
     검토 완료 일시 (승인 또는 거부된 경우)
     신청이 승인되거나 거부된 시간
-  example: "2025-05-06T10:15:00Z"
+  example: "2025-05-06T10:15:00+09:00"
   nullable: true

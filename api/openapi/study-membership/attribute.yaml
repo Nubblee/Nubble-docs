@@ -18,13 +18,13 @@ JoinedAt:
   type: string
   format: date-time
   description: 스터디 가입 일시
-  example: "2025-04-15T10:30:00Z"
+  example: "2025-04-15T10:30:00+09:00"
 
 WithdrawnAt:
   type: string
   format: date-time
   description: 스터디 탈퇴 일시 (탈퇴한 경우에만 존재)
-  example: "2025-06-20T18:45:00Z"
+  example: "2025-06-20T18:45:00+09:00"
   nullable: true
 
 WithdrawnReason:

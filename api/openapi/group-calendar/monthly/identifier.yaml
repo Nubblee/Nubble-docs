@@ -5,8 +5,8 @@ Type:
 
 Id:
   type: string
-  description: 월간 캘린더 고유 식별자
-  example: "group-123-monthly-calendars-2025-05"
+  description: 월간 캘린더 고유 식별자 (연도-월 형식)
+  example: "2025-05"
 
 Identifier:
   type: object

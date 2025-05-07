@@ -2,7 +2,7 @@ PinnedAt:
   type: string
   format: date-time
   description: 공지사항 고정 설정 시간
-  example: "2025-05-01T14:30:00Z"
+  example: "2025-05-01T14:30:00+09:00"
 
 Order:
   type: integer

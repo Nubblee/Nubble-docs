@@ -12,4 +12,4 @@ ExpiresAt:
   description: | 
     세션 만료 시간 (UTC, ISO 8601/RFC 3339 형식)
     'Z' 접미사는 UTC 시간임을 명시적으로 표시
-  example: "2025-05-01T06:30:00Z"
+  example: "2025-05-01T06:30:00+09:00"
