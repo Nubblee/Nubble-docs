@@ -1,0 +1,50 @@
+Date:
+  type: string
+  format: date
+  description: 캘린더 날짜 (YYYY-MM-DD)
+  example: "2025-05-01"
+
+SolutionStatuses:
+  type: array
+  description: 해당 일자의 모든 문제 완료 상태 정보
+  items:
+    type: object
+    properties:
+      problem:
+        type: object
+        description: 문제 관련 정보
+        properties:
+          id:
+            type: string
+            description: 문제 ID
+            example: "789"
+          title:
+            type: string
+            description: 문제 제목
+            example: "Two Sum"
+      solution:
+        type: object
+        description: 풀이 관련 정보
+        properties:
+          status:
+            type: string
+            enum: [ SOLVED, UNSOLVED ]
+            description: 멤버의 해당 문제 풀이 상태
+            example: "SOLVED"
+          solvedAt:
+            type: string
+            format: date-time
+            description: 문제 해결 시간 (풀이가 있는 경우)
+            example: "2025-05-01T15:30:00Z"
+            nullable: true
+          id:
+            type: string
+            description: 풀이 ID (풀이가 있는 경우)
+            example: "solution-123"
+            nullable: true
+          url:
+            type: string
+            format: uri
+            description: 풀이 리소스에 직접 접근할 수 있는 URI
+            example: "/api/v1/solutions/solution-123"
+            nullable: true

@@ -178,3 +178,6 @@ paths:
   /study-groups/{studyGroupId}/calendar/monthly:
     get:
       $ref: './group-calendar/feature/monthly.yaml#/Get'
+  /study-groups/{studyGroupId}/members/{userId}/daily:
+    get:
+      $ref: './group-calendar/feature/member-daily.yaml#/Get'

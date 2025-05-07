@@ -1,0 +1,5 @@
+Self:
+  type: string
+  format: uri
+  description: 멤버 일별 캘린더 리소스에 직접 접근할 수 있는 URI
+  example: "/api/v1/study-groups/123/calendar/members/456/daily?date=2025-05-01"

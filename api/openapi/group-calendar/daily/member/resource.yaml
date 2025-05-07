@@ -1,0 +1,33 @@
+Resource:
+  type: object
+  properties:
+    type:
+      $ref: './identifier.yaml#/Type'
+    id:
+      $ref: './identifier.yaml#/Id'
+    attributes:
+      type: object
+      properties:
+        date:
+          $ref: './attribute.yaml#/Date'
+        solutionStatuses:
+          $ref: './attribute.yaml#/SolutionStatuses'
+    meta:
+      type: object
+      properties:
+        totalProblemCount:
+          $ref: './meta.yaml#/TotalProblemCount'
+        solvedCount:
+          $ref: './meta.yaml#/SolvedCount'
+    relationships:
+      type: object
+      properties:
+        member:
+          $ref: '../../../user/relationship.yaml#/ToOne'
+        dailyCalendar:
+          $ref: '../group/relationship.yaml#/ToOne'
+    link:
+      type: object
+      properties:
+        self:
+          $ref: './link.yaml#/Self'

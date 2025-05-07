@@ -1,0 +1,17 @@
+Type:
+  type: string
+  enum: [member-daily-calendars]
+  default: member-daily-calendars
+
+Id:
+  type: string
+  description: 멤버 일별 캘린더 고유 식별자
+  example: "group-123-daily-calendars-2025-05-01-member-456"
+
+Identifier:
+  type: object
+  properties:
+    type:
+      $ref: '#/Type'
+    id:
+      $ref: '#/Id'
