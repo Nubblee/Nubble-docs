@@ -12,13 +12,13 @@ Resource:
           $ref: './attribute.yaml#/Year'
         month:
           $ref: './attribute.yaml#/Month'
+        DailyCalendars:
+          $ref: './attribute.yaml#/DailyCalendars'
     relationships:
       type: object
       properties:
         studyGroup:
           $ref: '../../study-group/relationship.yaml#/ToOne'
-        dailyCalendars:
-          $ref: '../daily/group/relationship.yaml#/ToMany'
     links:
       type: object
       properties:

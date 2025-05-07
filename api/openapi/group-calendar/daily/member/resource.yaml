@@ -24,8 +24,6 @@ Resource:
       properties:
         member:
           $ref: '../../../user/relationship.yaml#/ToOne'
-        dailyCalendar:
-          $ref: '../group/relationship.yaml#/ToOne'
     link:
       type: object
       properties:
